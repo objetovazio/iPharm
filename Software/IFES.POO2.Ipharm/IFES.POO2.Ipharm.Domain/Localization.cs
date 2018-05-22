@@ -11,5 +11,8 @@ namespace IFES.POO2.Ipharm.Domain
         public int Id { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
+
+        public Guid UserId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -1,0 +1,5 @@
+Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;
+
+Enable-Migrations -ProjectName TreinaWeb.Musicas.AcessoDados.Entity
+Add-Migration MigracaoInicialTeste -ProjectName TreinaWeb.Musicas.AcessoDados.Entity -StartUpProjectName TreinaWeb.Musicas.AcessoDados.Entity
+Update-Database -ProjectName TreinaWeb.Musicas.AcessoDados.Entity -StartUpProjectName TreinaWeb.Musicas.AcessoDados.Entity -Verbose

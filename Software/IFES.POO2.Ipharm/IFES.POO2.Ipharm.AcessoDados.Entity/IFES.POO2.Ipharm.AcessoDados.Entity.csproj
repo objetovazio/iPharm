@@ -48,22 +48,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\IpharmContext.cs" />
-    <Compile Include="Migrations\201805220034410_MigracaoInicial.cs" />
-    <Compile Include="Migrations\201805220034410_MigracaoInicial.Designer.cs">
-      <DependentUpon>201805220034410_MigracaoInicial.cs</DependentUpon>
+    <Compile Include="Migrations\201805220527274_UserMigrationTest.cs" />
+    <Compile Include="Migrations\201805220527274_UserMigrationTest.Designer.cs">
+      <DependentUpon>201805220527274_UserMigrationTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeConfiguration\IpharmEntityAbstractConfiguration.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805220034410_MigracaoInicial.resx">
-      <DependentUpon>201805220034410_MigracaoInicial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="TypeConfiguration\Abstract\IpharmEntityAbstractConfiguration.cs" />
+    <Compile Include="TypeConfiguration\UserTypeConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Domain\IFES.POO2.Ipharm.Domain.csproj">
+      <Project>{c7f8d197-5689-4039-b093-9b1ceaac77c1}</Project>
+      <Name>IFES.POO2.Ipharm.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805220527274_UserMigrationTest.resx">
+      <DependentUpon>201805220527274_UserMigrationTest.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

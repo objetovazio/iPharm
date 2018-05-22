@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration;
+using IFES.POO2.Ipharm.Domain;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class IpharmContext : DbContext
     {
+        DbSet<User> Users { get; set; }
 
         public IpharmContext()
         {
@@ -18,7 +21,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-//            modelBuilder.Configurations.Add(new AlbumTypeConfiguration());
+            modelBuilder.Configurations.Add(new UserTypeConfiguration<User>());
         }
     }
 }

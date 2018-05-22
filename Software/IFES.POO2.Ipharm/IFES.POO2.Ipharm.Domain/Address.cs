@@ -8,15 +8,16 @@ namespace IFES.POO2.Ipharm.Domain
 {
     public class Address
     {
-        public int Id;
-        public string Street_Name;
-        public string Neighborhood;
+        public int Id { get; set; }
+        public string Street_Name { get; set; }
+        public string Neighborhood { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
         public string CEP { get; set; }
         public string Details { get; set; }
         public User User { get; set; }
+        public Guid UserId { get; set; }
 
     }
 }

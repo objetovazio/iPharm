@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.Domain
 {
@@ -17,6 +14,6 @@ namespace IFES.POO2.Ipharm.Domain
         public Boolean IsActive { get; set; }
 
         public Localization Localization { get; set; }
-        
+        public List<Address> Addresses { get; set; }
     }
 }

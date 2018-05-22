@@ -1,0 +1,14 @@
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.dll.config
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.dll
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.pdb
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\EntityFramework.dll
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\EntityFramework.xml
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.csprojResolveAssemblyReference.cache
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.csproj.CoreCompileInputs.cache
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.csproj.CopyComplete
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.dll
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.pdb
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.Migrations.MigracaoInicial.resources
+C:\Users\andre.martins\Documents\GitHub\iPharm\Software\IFES.POO2.Ipharm\IFES.POO2.Ipharm.AcessoDados.Entity\obj\Debug\IFES.POO2.Ipharm.AcessoDados.Entity.csproj.GenerateResource.cache

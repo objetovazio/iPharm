@@ -2,8 +2,7 @@
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
-    class UserTypeConfiguration<TUser> : IpharmEntityAbstractConfiguration<TUser>
-        where TUser : User
+    class UserTypeConfiguration : IpharmEntityAbstractConfiguration<User>
     {
         protected override void TableNameConfiguration()
         {
@@ -38,7 +37,13 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
                 .HasColumnName("USE_PHONE");
 
             Property(p => p.IsActive)
+                .IsRequired()
                 .HasColumnName("USE_ISACTIVE");
+
+            Property(p => p.IsAdministrator)
+                .IsRequired()
+                .HasColumnName("USE_ISADMINISTRATOR");
+
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -49,7 +54,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         protected override void ForeignKeyConfiguration()
         {
             HasOptional(opt => opt.Localization) // Localização é opcional
-                .WithRequired(a => (TUser)a.User); // Mas não consegue salvar uma localização, se não existir um usuário
+                .WithRequired(a => a.User); // Mas não consegue salvar uma localização, se não existir um usuário
         }
 
 

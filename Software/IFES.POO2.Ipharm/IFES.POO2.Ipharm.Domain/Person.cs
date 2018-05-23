@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.Domain
 {
-    public class Person : User
+    public class Person
     {
+        public Guid IdPerson { get; set; }
+        public Guid IdUser { get; set; }
         public string Cpf { get; set; }
         public DateTime Birthday { get; set; }
-        public List<PaymentMethod> PaymentMethods { get; set; }
+
+        public virtual List<PaymentMethod> PaymentMethods { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

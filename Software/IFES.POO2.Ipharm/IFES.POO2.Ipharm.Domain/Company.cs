@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.Domain
 {
-    public class Company : User
+    public class Company 
     {
+        public Guid Id { get; set; }
+        public Guid IdUser { get; set; }
         public string Cnpj { get; set; }
+        public string CompanyName { get; set; }
+
+        public virtual User User { get; set; }
+        public virtual List<Product> Products { get; set; } 
+        public virtual List<Review> Reviews { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

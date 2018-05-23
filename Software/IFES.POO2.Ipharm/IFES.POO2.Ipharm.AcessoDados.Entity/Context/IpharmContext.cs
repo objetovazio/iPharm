@@ -12,6 +12,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
     public class IpharmContext : DbContext
     {
         DbSet<User> Users { get; set; }
+        DbSet<Company> Companies { get; set; }
 
         public IpharmContext()
         {
@@ -21,7 +22,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UserTypeConfiguration<User>());
+            modelBuilder.Configurations.Add(new UserTypeConfiguration());
         }
     }
 }

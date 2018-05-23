@@ -14,35 +14,35 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             Property(p => p.Id)
                 .IsRequired()
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("USE_USERS");
+                .HasColumnName("USE_IdUsers");
 
             Property(p => p.Login)
                 .IsRequired()
                 .HasMaxLength(30)
-                .HasColumnName("USE_LOGIN");
+                .HasColumnName("USE_Login");
 
             Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(30)
-                .HasColumnName("USE_NAME");
+                .HasColumnName("USE_Name");
 
             Property(p => p.Email)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("USE_EMAIL");
+                .HasColumnName("USE_Email");
 
             Property(p => p.Phone)
                 .IsRequired()
                 .HasMaxLength(11)
-                .HasColumnName("USE_PHONE");
+                .HasColumnName("USE_Phone");
 
             Property(p => p.IsActive)
                 .IsRequired()
-                .HasColumnName("USE_ISACTIVE");
+                .HasColumnName("USE_IsActive");
 
             Property(p => p.IsAdministrator)
                 .IsRequired()
-                .HasColumnName("USE_ISADMINISTRATOR");
+                .HasColumnName("USE_IsAdministrator");
 
         }
 
@@ -53,8 +53,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
         protected override void ForeignKeyConfiguration()
         {
-            HasOptional(opt => opt.Localization) // Localização é opcional
-                .WithRequired(a => a.User); // Mas não consegue salvar uma localização, se não existir um usuário
         }
 
 

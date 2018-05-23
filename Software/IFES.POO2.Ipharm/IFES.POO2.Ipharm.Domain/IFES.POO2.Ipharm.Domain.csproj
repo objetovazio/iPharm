@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Company.cs" />
+    <Compile Include="ItemOrder.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Payment.cs" />

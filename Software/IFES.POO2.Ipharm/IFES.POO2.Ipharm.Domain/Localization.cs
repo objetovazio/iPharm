@@ -14,6 +14,6 @@ namespace IFES.POO2.Ipharm.Domain
         public float Longitude { get; set; }
 
         
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

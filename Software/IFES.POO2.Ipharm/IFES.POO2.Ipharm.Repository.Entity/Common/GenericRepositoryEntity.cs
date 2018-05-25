@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,7 @@ namespace IFES.POO2.Ipharm.Repository.Entity
         /// <param name="entity">Elemento T que será atualizado</param>
         public void Update(T entity)
         {
+            //context.Set<T>().AddOrUpdate(entity);
             context.Set<T>().Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();

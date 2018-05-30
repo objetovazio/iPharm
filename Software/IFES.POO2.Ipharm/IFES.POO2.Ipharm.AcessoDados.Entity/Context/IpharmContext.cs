@@ -11,9 +11,17 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class IpharmContext : DbContext
     {
-        DbSet<User> Users { get; set; }
-        DbSet<Localization> Localizations { get; set; }
         DbSet<Address> Addresses { get; set; }
+        DbSet<Company> Companies { get; set; }
+        DbSet<Localization> Localizations { get; set; }
+        DbSet<ItemOrder> ItemsOrder { get; set; }
+        DbSet<Order> Orders { get; set; }
+        DbSet<Payment> Payments { get; set; }
+        DbSet<PaymentMethod> PaymentMethods { get; set; }
+        DbSet<Person> People { get; set; }
+        DbSet<Product> Products { get; set; }
+        DbSet<Review> Reviews { get; set; }
+        DbSet<User> Users { get; set; }
 
         public IpharmContext()
         {
@@ -21,10 +29,11 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
             Configuration.ProxyCreationEnabled = false; // Para não criar um proxy de objeto (Simula uma cópia do meu objeto original)
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new UserTypeConfiguration());
-            modelBuilder.Configurations.Add(new LocalizationTypeConfiguration());
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Configurations.Add(new UserTypeConfiguration());
+        //    modelBuilder.Configurations.Add(new LocalizationTypeConfiguration());
+        //    modelBuilder.Configurations.Add(new AddressTypeConfiguration());
+        //}
     }
 }

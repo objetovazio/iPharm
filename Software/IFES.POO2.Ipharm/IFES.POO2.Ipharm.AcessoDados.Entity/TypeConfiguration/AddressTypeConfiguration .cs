@@ -6,7 +6,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("ADDRESS");
+            //ToTable("ADDRESS");
         }
 
         protected override void TableFieldConfiguration()
@@ -14,42 +14,42 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             // Key
             Property(p => p.Id)
                 .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("ADD_IdAddress");
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            //.HasColumnName("ADD_IdAddress");
 
             //Foreign Key
-            Property(p => p.IdUser)
-                .IsRequired()
-                .HasColumnName("USE_IdUsers");
+            //Property(p => p.User_Id)
+                //.IsRequired();
+                //.HasColumnName("USE_IdUsers");
 
             //Other Fields
             Property(p => p.Street_Name)
-                .IsRequired()
-                .HasColumnName("ADD_Street_Name");
+                .IsRequired();
+            //.HasColumnName("ADD_Street_Name");
 
             Property(p => p.Neighborhood)
-                .IsRequired()
-                .HasColumnName("ADD_Neighborhood");
+                .IsRequired();
+            //.HasColumnName("ADD_Neighborhood");
 
             Property(p => p.City)
-                .IsRequired()
-                .HasColumnName("ADD_City");
+                .IsRequired();
+            //.HasColumnName("ADD_City");
 
             Property(p => p.State)
-                .IsRequired()
-                .HasColumnName("ADD_State");
+                .IsRequired();
+            //.HasColumnName("ADD_State");
 
             Property(p => p.Country)
-                .IsRequired()
-                .HasColumnName("ADD_Country");
+                .IsRequired();
+            //.HasColumnName("ADD_Country");
 
             Property(p => p.CEP)
-                .IsRequired()
-                .HasColumnName("ADD_CEP");
+                .IsRequired();
+            //.HasColumnName("ADD_CEP");
 
             Property(p => p.Details)
-                .IsRequired()
-                .HasColumnName("ADD_Details");
+                .IsRequired();
+                //.HasColumnName("ADD_Details");
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -60,8 +60,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         protected override void ForeignKeyConfiguration()
         {
             HasRequired(add => add.User)
-                .WithMany(us => us.Addresses)
-                .HasForeignKey(fk => fk.IdUser);
+                .WithMany(us => us.Addresses);
         }
 
 

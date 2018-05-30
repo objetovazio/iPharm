@@ -48,15 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\IpharmContext.cs" />
-    <Compile Include="Migrations\201805231555198_MigracaoInicial.cs" />
-    <Compile Include="Migrations\201805231555198_MigracaoInicial.Designer.cs">
-      <DependentUpon>201805231555198_MigracaoInicial.cs</DependentUpon>
+    <Compile Include="Migrations\201805301551069_Migracao1.cs" />
+    <Compile Include="Migrations\201805301551069_Migracao1.Designer.cs">
+      <DependentUpon>201805301551069_Migracao1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeConfiguration\Abstract\IpharmEntityAbstractConfiguration.cs" />
     <Compile Include="TypeConfiguration\LocalizationTypeConfiguration.cs" />
     <Compile Include="TypeConfiguration\AddressTypeConfiguration .cs" />
+    <Compile Include="TypeConfiguration\ReviewTypeConfiguration.cs" />
     <Compile Include="TypeConfiguration\UserTypeConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,8 +71,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805231555198_MigracaoInicial.resx">
-      <DependentUpon>201805231555198_MigracaoInicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805301551069_Migracao1.resx">
+      <DependentUpon>201805301551069_Migracao1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

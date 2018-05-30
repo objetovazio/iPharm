@@ -11,7 +11,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("LOCALIZATION");
+
         }
 
         protected override void TableFieldConfiguration()
@@ -19,22 +19,21 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             // Key
             Property(p => p.Id)
                 .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("LOC_IdLocalization");
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            //Foreign Key
-            Property(p => p.IdUser)
-                .IsRequired()
-                .HasColumnName("USE_IdUsers");
+            ////Foreign Key
+            //Property(p => p.User_Id)
+            //    .IsRequired();
+
 
             //Other Fields
             Property(p => p.Latitude)
-                .IsRequired()
-                .HasColumnName("LOC_Latitude");
+                .IsRequired();
+
+
 
             Property(p => p.Longitude)
-                .IsRequired()
-                .HasColumnName("LOC_Longitude");
+                .IsRequired();
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -44,8 +43,9 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(loc => loc.User)
-                .WithOptional(us => us.Localization);
+            HasRequired(p => p.User)
+                .WithOptional(u => u.Localization)
+                .WillCascadeOnDelete(true);
         }
 
     }

@@ -6,43 +6,35 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("USERS");
         }
 
         protected override void TableFieldConfiguration()
         {
             Property(p => p.Id)
                 .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("USE_IdUsers");
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(p => p.Login)
                 .IsRequired()
-                .HasMaxLength(30)
-                .HasColumnName("USE_Login");
+                .HasMaxLength(30);
 
             Property(p => p.Name)
                 .IsRequired()
-                .HasMaxLength(30)
-                .HasColumnName("USE_Name");
+                .HasMaxLength(30);
 
             Property(p => p.Email)
                 .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("USE_Email");
+                .HasMaxLength(50);
 
             Property(p => p.Phone)
                 .IsRequired()
-                .HasMaxLength(11)
-                .HasColumnName("USE_Phone");
+                .HasMaxLength(11);
 
             Property(p => p.IsActive)
-                .IsRequired()
-                .HasColumnName("USE_IsActive");
+                .IsRequired();
 
             Property(p => p.IsAdministrator)
-                .IsRequired()
-                .HasColumnName("USE_IsAdministrator");
+                .IsRequired();
 
         }
 

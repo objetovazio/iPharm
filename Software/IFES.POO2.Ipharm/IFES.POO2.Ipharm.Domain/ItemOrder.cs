@@ -8,6 +8,7 @@ namespace IFES.POO2.Ipharm.Domain
 {
     public class ItemOrder
     {
+        public int Id { get; set; }
         public int IdOrder { get; set; }
         public int IdProduct { get; set; }
         public decimal ItemValue { get; set; }

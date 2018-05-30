@@ -6,6 +6,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
+            ToTable("User");
         }
 
         protected override void TableFieldConfiguration()
@@ -35,7 +36,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             Property(p => p.IsAdministrator)
                 .IsRequired();
-
         }
 
         protected override void PrimaryKeyConfiguration()

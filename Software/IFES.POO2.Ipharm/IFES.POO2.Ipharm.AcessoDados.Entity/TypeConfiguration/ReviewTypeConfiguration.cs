@@ -11,11 +11,11 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(p => p.Company).
-                WithRequiredDependent();
+            HasRequired(p => p.Company)
+                .WithMany(c => c.Reviews);
 
             HasRequired(p => p.Order)
-                .WithRequiredDependent();
+                .WithRequiredDependent(r => r.Review);
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -25,12 +25,21 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
         protected override void TableFieldConfiguration()
         {
-            
+            Property(p => p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(p => p.Stars)
+                .IsRequired();
+
+            Property(p => p.ReviewDetails)
+                .IsRequired()
+                .HasMaxLength(200);
         }
 
         protected override void TableNameConfiguration()
         {
-            
+            ToTable("Review");
         }
     }
 }

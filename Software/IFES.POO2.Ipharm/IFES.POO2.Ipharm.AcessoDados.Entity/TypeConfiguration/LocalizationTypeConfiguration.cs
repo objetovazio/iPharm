@@ -11,7 +11,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
-
+            ToTable("Localization");
         }
 
         protected override void TableFieldConfiguration()
@@ -21,16 +21,9 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
                 .IsRequired()
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            ////Foreign Key
-            //Property(p => p.User_Id)
-            //    .IsRequired();
-
-
             //Other Fields
             Property(p => p.Latitude)
                 .IsRequired();
-
-
 
             Property(p => p.Longitude)
                 .IsRequired();

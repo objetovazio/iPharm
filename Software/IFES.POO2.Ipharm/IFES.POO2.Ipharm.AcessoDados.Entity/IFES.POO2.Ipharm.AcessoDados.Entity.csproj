@@ -62,17 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805310558323_M.cs" />
-    <Compile Include="Migrations\201805310558323_M.Designer.cs">
-      <DependentUpon>201805310558323_M.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805310652218_M1.cs" />
-    <Compile Include="Migrations\201805310652218_M1.Designer.cs">
-      <DependentUpon>201805310652218_M1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805310657431_M2.cs" />
-    <Compile Include="Migrations\201805310657431_M2.Designer.cs">
-      <DependentUpon>201805310657431_M2.cs</DependentUpon>
+    <Compile Include="Migrations\201805311818510_M.cs" />
+    <Compile Include="Migrations\201805311818510_M.Designer.cs">
+      <DependentUpon>201805311818510_M.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
@@ -123,14 +115,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805310558323_M.resx">
-      <DependentUpon>201805310558323_M.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805310652218_M1.resx">
-      <DependentUpon>201805310652218_M1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805310657431_M2.resx">
-      <DependentUpon>201805310657431_M2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805311818510_M.resx">
+      <DependentUpon>201805311818510_M.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

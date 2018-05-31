@@ -165,6 +165,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 
                     User domainUser = Mapper.Map<RegisterViewModel, User>(model);
                     domainUser.IsAdministrator = true;
+                    domainUser.Id = new Guid(user.Id);
                     repository.Insert(domainUser);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

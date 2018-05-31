@@ -62,10 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805311818510_M.cs" />
-    <Compile Include="Migrations\201805311818510_M.Designer.cs">
-      <DependentUpon>201805311818510_M.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
     <Compile Include="Context\IpharmContext.cs" />
@@ -94,13 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DeleteAllTables.sql" />
-    <Content Include="App_Data\IfesIpharm.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\IfesIpharm_log.ldf">
-      <DependentUpon>IfesIpharm.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -113,11 +102,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805311818510_M.resx">
-      <DependentUpon>201805311818510_M.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

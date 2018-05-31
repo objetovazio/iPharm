@@ -6,7 +6,6 @@ namespace IFES.POO2.Ipharm.Domain
     public class Product
     {
         public int Id { get; set; }
-        public Guid IdCompany { get; set; }
         public string Name { get; set; }
         public decimal Value { get; set; }
         public string Description { get; set; }

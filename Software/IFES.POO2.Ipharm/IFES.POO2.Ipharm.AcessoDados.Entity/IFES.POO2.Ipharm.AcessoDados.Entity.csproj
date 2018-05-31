@@ -11,6 +11,21 @@
     <AssemblyName>IFES.POO2.Ipharm.AcessoDados.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,16 +62,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\IpharmContext.cs" />
-    <Compile Include="Migrations\201805310236534_Migration1.cs" />
-    <Compile Include="Migrations\201805310236534_Migration1.Designer.cs">
-      <DependentUpon>201805310236534_Migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805310243392_M2.cs" />
-    <Compile Include="Migrations\201805310243392_M2.Designer.cs">
-      <DependentUpon>201805310243392_M2.cs</DependentUpon>
+    <Compile Include="Migrations\201805310439190_M.cs" />
+    <Compile Include="Migrations\201805310439190_M.Designer.cs">
+      <DependentUpon>201805310439190_M.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
+    <Compile Include="Context\IpharmContext.cs" />
+    <Compile Include="TypeConfiguration\ItemOrderTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\OrderTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\PaymentConfiguration.cs" />
+    <Compile Include="TypeConfiguration\PaymentMethodConfiguration.cs" />
+    <Compile Include="TypeConfiguration\PersonMethodConfiguration.cs" />
+    <Compile Include="TypeConfiguration\ProductMethodConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeConfiguration\Abstract\IpharmEntityAbstractConfiguration.cs" />
     <Compile Include="TypeConfiguration\LocalizationTypeConfiguration.cs" />
@@ -75,11 +93,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805310236534_Migration1.resx">
-      <DependentUpon>201805310236534_Migration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805310243392_M2.resx">
-      <DependentUpon>201805310243392_M2.cs</DependentUpon>
+    <Content Include="App_Data\DeleteAllTables.sql" />
+    <Content Include="App_Data\IfesIpharm.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\IfesIpharm_log.ldf">
+      <DependentUpon>IfesIpharm.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805310439190_M.resx">
+      <DependentUpon>201805310439190_M.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

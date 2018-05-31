@@ -4,11 +4,11 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
-    public class PaymentMethodConfiguration : IpharmEntityAbstractConfiguration<PaymentMethod>
+    internal class CompanyTypeConfiguration : IpharmEntityAbstractConfiguration<Company>
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("PaymentMethod");
+            ToTable("Company");
         }
 
         protected override void TableFieldConfiguration()
@@ -19,17 +19,11 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             //Other Fields
-            Property(p => p.PaymentOption)
+            Property(p => p.Cnpj)
                 .IsRequired();
 
-            Property(p => p.Description)
+            Property(p => p.CompanyName)
                 .IsRequired();
-
-            Property(p => p.CardNumber)
-                .IsOptional();
-
-            Property(p => p.SecurityCode)
-                .IsOptional();
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -39,8 +33,9 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(add => add.Person)
-                .WithRequiredDependent();
+            HasRequired(p => p.User)
+                .WithOptional(u => u.Company)
+                .WillCascadeOnDelete(true);
         }
     }
 }

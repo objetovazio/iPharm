@@ -9,7 +9,6 @@ namespace IFES.POO2.Ipharm.Domain
     public class PaymentMethod
     {
         public int Id { get; set; }
-        public int IdPerson { get; set; }
         public EnumPaymentMethod PaymentOption { get; set; }
         public string Description { get; set; }
         public string CardNumber { get; set; }

@@ -9,13 +9,18 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
     public class ReviewTypeConfiguration : IpharmEntityAbstractConfiguration<Review>
     {
+        protected override void TableNameConfiguration()
+        {
+            ToTable("Review");
+        }
+
         protected override void ForeignKeyConfiguration()
         {
             HasRequired(p => p.Company)
                 .WithMany(c => c.Reviews);
 
             HasRequired(p => p.Order)
-                .WithRequiredPrincipal();
+                .WithRequiredDependent();
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -37,9 +42,5 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
                 .HasMaxLength(200);
         }
 
-        protected override void TableNameConfiguration()
-        {
-            ToTable("Review");
-        }
     }
 }

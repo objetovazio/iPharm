@@ -6,24 +6,43 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class PaymentTypeConfiguration : IpharmEntityAbstractConfiguration<Payment>
     {
+        protected override void TableNameConfiguration()
+        {
+            ToTable("Payment");
+        }
+
         protected override void ForeignKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasRequired(p => p.Order)
+                .WithRequiredDependent();
+
+            HasRequired(p => p.PaymentMethod)
+               .WithRequiredDependent();
         }
 
         protected override void PrimaryKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasKey(p => p.Id);
         }
 
         protected override void TableFieldConfiguration()
         {
-            throw new System.NotImplementedException();
+            // Key
+            Property(p => p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            //Other Fields
+            Property(p => p.Value)
+                .IsRequired();
+
+            Property(p => p.Date)
+               .IsRequired();
+
+            Property(p => p.PaymentStatus)
+               .IsRequired();
         }
 
-        protected override void TableNameConfiguration()
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

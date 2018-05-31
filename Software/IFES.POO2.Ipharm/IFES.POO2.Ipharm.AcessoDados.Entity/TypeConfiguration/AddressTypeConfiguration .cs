@@ -49,7 +49,5 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             HasRequired(add => add.User)
                 .WithMany(us => us.Addresses);
         }
-
-
     }
 }

@@ -6,24 +6,38 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class PersonMethodConfiguration : IpharmEntityAbstractConfiguration<Person>
     {
-        protected override void ForeignKeyConfiguration()
+        protected override void TableNameConfiguration()
         {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void PrimaryKeyConfiguration()
-        {
-            throw new System.NotImplementedException();
+            ToTable("Person");
         }
 
         protected override void TableFieldConfiguration()
         {
-            throw new System.NotImplementedException();
+            // Key
+            Property(p => p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            //Other Fields
+            Property(p => p.Cpf)
+                .IsRequired();
+
+            Property(p => p.Birthday)
+                .IsRequired();
+
+
         }
 
-        protected override void TableNameConfiguration()
+        protected override void PrimaryKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasKey(p => p.Id);
+        }
+
+        protected override void ForeignKeyConfiguration()
+        {
+            HasRequired(p => p.User)
+                .WithOptional(u => u.Person)
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -6,24 +6,41 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class ProductMethodConfiguration : IpharmEntityAbstractConfiguration<Product>
     {
-        protected override void ForeignKeyConfiguration()
+        protected override void TableNameConfiguration()
         {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void PrimaryKeyConfiguration()
-        {
-            throw new System.NotImplementedException();
+            ToTable("Product");
         }
 
         protected override void TableFieldConfiguration()
         {
-            throw new System.NotImplementedException();
+            // Key
+            Property(p => p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            //Other Fields
+            Property(p => p.Name)
+                .IsRequired();
+
+            Property(p => p.Value)
+                .IsRequired();
+
+            Property(p => p.Description)
+                .IsRequired();
+
+            Property(p => p.HasControl)
+                .IsRequired();
         }
 
-        protected override void TableNameConfiguration()
+        protected override void PrimaryKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasKey(p => p.Id);
+        }
+
+        protected override void ForeignKeyConfiguration()
+        {
+            HasRequired(add => add.Company)
+                .WithRequiredDependent();
         }
     }
 }

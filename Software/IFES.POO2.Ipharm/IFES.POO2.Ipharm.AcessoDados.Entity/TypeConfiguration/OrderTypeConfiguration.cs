@@ -6,24 +6,42 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class OrderTypeConfiguration : IpharmEntityAbstractConfiguration<Order>
     {
+        protected override void TableNameConfiguration()
+        {
+            ToTable("Order");
+        }
+
         protected override void ForeignKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasRequired(p => p.Company)
+                .WithRequiredDependent();
+                
+            HasRequired(p => p.Person)
+                .WithRequiredDependent();
+
+            HasRequired(p => p.Address)
+                .WithRequiredDependent();
         }
 
         protected override void PrimaryKeyConfiguration()
         {
-            throw new System.NotImplementedException();
+            HasKey(p => p.Id);
         }
 
         protected override void TableFieldConfiguration()
         {
-            throw new System.NotImplementedException();
+            // Key
+            Property(p => p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            //Other Fields
+            Property(p => p.ValueOrder)
+                .IsRequired();
+
+            Property(p => p.OrderStatus)
+                .IsRequired();
         }
 
-        protected override void TableNameConfiguration()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

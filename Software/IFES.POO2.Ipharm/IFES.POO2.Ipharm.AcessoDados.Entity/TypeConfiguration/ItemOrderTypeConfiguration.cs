@@ -13,11 +13,11 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(p => p.Order)
-                .WithRequiredDependent();
+            HasRequired(io => io.Order)
+                .WithMany(o => o.ItemsOrder);
 
-            HasRequired(p => p.Product)
-                .WithRequiredDependent();
+            HasRequired(io => io.Product)
+                .WithMany(prod => prod.ItemOrders);
         }
 
         protected override void PrimaryKeyConfiguration()

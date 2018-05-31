@@ -40,7 +40,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
         protected override void ForeignKeyConfiguration()
         {
             HasRequired(add => add.Person)
-                .WithRequiredDependent();
+                .WithMany(p => p.PaymentMethods)
+                .WillCascadeOnDelete(false);
         }
     }
 }

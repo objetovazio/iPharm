@@ -34,8 +34,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
         protected override void ForeignKeyConfiguration()
         {
             HasRequired(p => p.User)
-                .WithOptional(u => u.Company)
-                .WillCascadeOnDelete(true);
+                .WithOptional(u => u.Company);
         }
     }
 }

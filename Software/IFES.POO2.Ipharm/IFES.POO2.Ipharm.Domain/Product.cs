@@ -11,7 +11,6 @@ namespace IFES.POO2.Ipharm.Domain
         public string Description { get; set; }
         public bool HasControl { get; set; }
 
-
         public virtual List<ItemOrder> ItemOrders { get; set; }
         public virtual Company Company { get; set; }
     }

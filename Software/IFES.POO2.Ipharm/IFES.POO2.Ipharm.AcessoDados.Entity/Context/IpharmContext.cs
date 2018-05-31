@@ -38,8 +38,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
             modelBuilder.Configurations.Add(new OrderTypeConfiguration());
             modelBuilder.Configurations.Add(new PaymentTypeConfiguration());
             modelBuilder.Configurations.Add(new PaymentMethodConfiguration());
-            modelBuilder.Configurations.Add(new PersonMethodConfiguration());
-            modelBuilder.Configurations.Add(new ProductMethodConfiguration());
+            modelBuilder.Configurations.Add(new PersonTypeConfiguration());
+            modelBuilder.Configurations.Add(new ProductTypeConfiguration());
             modelBuilder.Configurations.Add(new UserTypeConfiguration());
             modelBuilder.Configurations.Add(new ReviewTypeConfiguration());
         }

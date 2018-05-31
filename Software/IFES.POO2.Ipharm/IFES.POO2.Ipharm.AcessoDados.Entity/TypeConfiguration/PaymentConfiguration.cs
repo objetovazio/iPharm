@@ -14,10 +14,10 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
         protected override void ForeignKeyConfiguration()
         {
             HasRequired(p => p.Order)
-                .WithRequiredDependent();
+                .WithMany(c => c.Payments);
 
             HasRequired(p => p.PaymentMethod)
-               .WithRequiredDependent();
+                .WithMany(pm => pm.Payments);
         }
 
         protected override void PrimaryKeyConfiguration()

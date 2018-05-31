@@ -4,11 +4,11 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
-    public class PersonMethodConfiguration : IpharmEntityAbstractConfiguration<Person>
+    public class ProductTypeConfiguration : IpharmEntityAbstractConfiguration<Product>
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("Person");
+            ToTable("Product");
         }
 
         protected override void TableFieldConfiguration()
@@ -19,13 +19,17 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             //Other Fields
-            Property(p => p.Cpf)
+            Property(p => p.Name)
                 .IsRequired();
 
-            Property(p => p.Birthday)
+            Property(p => p.Value)
                 .IsRequired();
 
+            Property(p => p.Description)
+                .IsRequired();
 
+            Property(p => p.HasControl)
+                .IsRequired();
         }
 
         protected override void PrimaryKeyConfiguration()
@@ -35,9 +39,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(p => p.User)
-                .WithOptional(u => u.Person)
-                .WillCascadeOnDelete(true);
+            HasRequired(p => p.Company)
+                .WithMany(com => com.Products);
         }
     }
 }

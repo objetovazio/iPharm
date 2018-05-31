@@ -14,7 +14,6 @@ namespace IFES.POO2.Ipharm.Domain
 
         public virtual List<PaymentMethod> PaymentMethods { get; set; }
         public virtual List<Order> Orders { get; set; }
-
         public virtual User User { get; set; }
     }
 }

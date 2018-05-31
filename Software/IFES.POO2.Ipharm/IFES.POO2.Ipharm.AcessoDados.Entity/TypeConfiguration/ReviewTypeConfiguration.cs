@@ -20,7 +20,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
                 .WithMany(c => c.Reviews);
 
             HasRequired(p => p.Order)
-                .WithRequiredDependent();
+                .WithRequiredDependent(o => o.Review);
         }
 
         protected override void PrimaryKeyConfiguration()

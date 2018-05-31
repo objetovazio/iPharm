@@ -2,7 +2,7 @@
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
-    class UserTypeConfiguration : IpharmEntityAbstractConfiguration<User>
+    public class UserTypeConfiguration : IpharmEntityAbstractConfiguration<User>
     {
         protected override void TableNameConfiguration()
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
-    class ReviewTypeConfiguration : IpharmEntityAbstractConfiguration<Review>
+    public class ReviewTypeConfiguration : IpharmEntityAbstractConfiguration<Review>
     {
         protected override void ForeignKeyConfiguration()
         {
@@ -15,7 +15,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
                 .WithMany(c => c.Reviews);
 
             HasRequired(p => p.Order)
-                .WithRequiredDependent(r => r.Review);
+                .WithRequiredPrincipal();
         }
 
         protected override void PrimaryKeyConfiguration()

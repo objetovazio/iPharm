@@ -31,10 +31,17 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UserTypeConfiguration());
-            modelBuilder.Configurations.Add(new LocalizationTypeConfiguration());
             modelBuilder.Configurations.Add(new AddressTypeConfiguration());
+            modelBuilder.Configurations.Add(new CompanyTypeConfiguration());
+            modelBuilder.Configurations.Add(new LocalizationTypeConfiguration());
+            modelBuilder.Configurations.Add(new ItemOrderTypeConfiguration());
+            modelBuilder.Configurations.Add(new OrderTypeConfiguration());
+            modelBuilder.Configurations.Add(new PaymentTypeConfiguration());
+            modelBuilder.Configurations.Add(new PaymentMethodConfiguration());
+            modelBuilder.Configurations.Add(new PersonMethodConfiguration());
             modelBuilder.Configurations.Add(new ReviewTypeConfiguration());
+            modelBuilder.Configurations.Add(new UserTypeConfiguration());
+            modelBuilder.Configurations.Add(new ProductMethodConfiguration());
         }
     }
 }

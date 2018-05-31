@@ -2,7 +2,7 @@
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
-    class AddressTypeConfiguration : IpharmEntityAbstractConfiguration<Address>
+    public class AddressTypeConfiguration : IpharmEntityAbstractConfiguration<Address>
     {
         protected override void TableNameConfiguration()
         {

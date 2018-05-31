@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
-    class LocalizationTypeConfiguration : IpharmEntityAbstractConfiguration<Localization>
+    public class LocalizationTypeConfiguration : IpharmEntityAbstractConfiguration<Localization>
     {
         protected override void TableNameConfiguration()
         {

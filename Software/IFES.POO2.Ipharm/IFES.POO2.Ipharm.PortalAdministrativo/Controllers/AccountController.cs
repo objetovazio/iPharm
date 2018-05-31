@@ -9,6 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IFES.POO2.Ipharm.PortalAdministrativo.Models;
+using IFES.POO2.Ipharm.Domain;
+using IFES.POO2.Ipharm.Repository.Common;
+using IFES.POO2.Ipharm.Repository.Entity;
+using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
+using AutoMapper;
 
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
@@ -17,6 +22,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IGenericRepository<User, Guid> repository = new GenericRepositoryEntity<User, Guid>(new IpharmContext());
 
         public AccountController()
         {
@@ -156,7 +162,11 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    User domainUser = Mapper.Map<RegisterViewModel, User>(model);
+                    domainUser.IsAdministrator = true;
+                    repository.Insert(domainUser);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

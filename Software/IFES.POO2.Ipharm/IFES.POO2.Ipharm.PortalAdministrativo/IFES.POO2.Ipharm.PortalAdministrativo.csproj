@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -53,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -184,11 +188,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="AutoMapper\DomainToViewModel.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AutoMapper\ViewModelToDomain.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -198,6 +205,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -274,6 +282,24 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.AcessoDados.Entity\IFES.POO2.Ipharm.AcessoDados.Entity.csproj">
+      <Project>{f0f8c5e2-8834-4047-a3f7-1d7e444770fd}</Project>
+      <Name>IFES.POO2.Ipharm.AcessoDados.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Domain\IFES.POO2.Ipharm.Domain.csproj">
+      <Project>{c7f8d197-5689-4039-b093-9b1ceaac77c1}</Project>
+      <Name>IFES.POO2.Ipharm.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Common\IFES.POO2.Ipharm.Repository.Common.csproj">
+      <Project>{4d8d9d23-cd7c-4579-bf2d-764c79e7ad29}</Project>
+      <Name>IFES.POO2.Ipharm.Repository.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Entity\IFES.POO2.Ipharm.Repository.Entity.csproj">
+      <Project>{9b528030-d02d-442e-9b1d-0a40ebdd91ac}</Project>
+      <Name>IFES.POO2.Ipharm.Repository.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

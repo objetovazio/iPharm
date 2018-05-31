@@ -40,7 +40,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -51,6 +51,17 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
             };
 
             // Configure validation logic for passwords
+#if DEBUG
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+#else
+
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
@@ -59,6 +70,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
+#endif
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
@@ -81,7 +93,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

@@ -6,7 +6,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
     {
         protected override void TableNameConfiguration()
         {
-            ToTable("User");
+            ToTable("U_User");
         }
 
         protected override void TableFieldConfiguration()
@@ -17,11 +17,11 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             Property(p => p.Login)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(20);
 
             Property(p => p.Name)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(50);
 
             Property(p => p.Email)
                 .IsRequired()

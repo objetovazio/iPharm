@@ -10,8 +10,8 @@ namespace IFES.POO2.Ipharm.Domain
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public Boolean IsActive { get; set; }
-        public Boolean IsAdministrator { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsAdministrator { get; set; }
 
         public virtual Localization Localization { get; set; }
         public virtual List<Address> Addresses { get; set; }

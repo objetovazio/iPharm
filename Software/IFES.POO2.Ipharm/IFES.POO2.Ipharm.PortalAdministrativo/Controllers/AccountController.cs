@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using IFES.POO2.Ipharm.PortalAdministrativo.Models;
 using IFES.POO2.Ipharm.Domain;
 using IFES.POO2.Ipharm.Repository.Common;
-using IFES.POO2.Ipharm.Repository.Entity;
+using IFES.POO2.Ipharm.Repository.Common.Entity;
 using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using AutoMapper;
 

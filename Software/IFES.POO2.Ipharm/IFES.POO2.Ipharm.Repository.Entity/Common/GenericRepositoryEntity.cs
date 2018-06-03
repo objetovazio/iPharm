@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IFES.POO2.Ipharm.Repository.Entity
+namespace IFES.POO2.Ipharm.Repository.Common.Entity
 {
     public class GenericRepositoryEntity<T, Key> : IGenericRepository<T, Key>
         where T : class

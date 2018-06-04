@@ -1,4 +1,4 @@
-﻿$(".validation-form").bind('invalid-form.validate',
+﻿$("form").bind('invalid-form.validate',
     function (form, validator) {
         var errors = "";
         for (var i = 0; i < validator.errorList.length; i++) {

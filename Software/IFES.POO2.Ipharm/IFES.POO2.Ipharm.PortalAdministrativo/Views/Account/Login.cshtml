@@ -1,42 +1,36 @@
 ﻿@using IFES.POO2.Ipharm.PortalAdministrativo.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
-    Layout = "";
+    ViewBag.Title = "iPharm - Login";
+    Layout = "~/Views/Shared/_ViewLogin.cshtml";
 }
 
-<html>
-<head>
-    <link href="~/Content/Custom/Login.css" rel="stylesheet" />
-</head>
+<div class="login-page">
+    <div class="form">
+        <img src="~/Images/logo.png" alt="iPharm" style="padding-bottom: 10%" />
 
-<body>
-
-    <div class="login-page">
-        <div class="form">
-            <img src="~/Images/logo.png" alt="iPharm" style="padding-bottom: 10%" />
-
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-form", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-
-                @Html.TextBoxFor(l => l.Login, new { placeholder = "Login" })
-
-                @Html.TextBoxFor(l => l.Password, new { placeholder = "Senha" })
-
-                <button type="submit">Login</button>
-
-
-            }
-
-
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-form validation-form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            
+        <div style="display:none">
+            @Html.ValidationSummary()
         </div>
-    </div>
-</body>
-</html>
+            
 
-@section Scripts {
-    <script src="~/Scripts/Custom/login.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            @Html.TextBoxFor(l => l.Login, new { placeholder = "Login" })
+
+            @Html.PasswordFor(l => l.Password, new { placeholder = "Senha" })
+
+            <button type="submit" id="btns">Login</button>
+        }
+
+        <p class="message">Esqueceu a senha? @Html.ActionLink("Recuperar Senha!", "ForgotPassword", "Account") </p>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        MessageInfo("iPharm", "Bem vindo ao Portal Administrativo do iPharm.")
+    </script>
+    }

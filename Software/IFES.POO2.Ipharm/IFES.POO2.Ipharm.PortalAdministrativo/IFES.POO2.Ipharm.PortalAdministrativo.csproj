@@ -218,6 +218,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\nprogress.css" />
+    <Content Include="Content\pnotify.custom.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -258,6 +259,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\pnotification.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -270,6 +272,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\nprogress.js" />
     <Content Include="Scripts\nprogress.min.js" />
+    <Content Include="Scripts\pnotify.custom.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -283,9 +286,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -309,6 +309,10 @@
     <Content Include="Views\Shared\_LayoutGentelella.cshtml" />
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Shared\_TopNavigation.cshtml" />
+    <Content Include="Views\Shared\_ViewLogin.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,13 +330,17 @@
       <Project>{c7f8d197-5689-4039-b093-9b1ceaac77c1}</Project>
       <Name>IFES.POO2.Ipharm.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Common.Entity\IFES.POO2.Ipharm.Repository.Common.Entity.csproj">
+      <Project>{9b528030-d02d-442e-9b1d-0a40ebdd91ac}</Project>
+      <Name>IFES.POO2.Ipharm.Repository.Common.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Common\IFES.POO2.Ipharm.Repository.Common.csproj">
       <Project>{4d8d9d23-cd7c-4579-bf2d-764c79e7ad29}</Project>
       <Name>IFES.POO2.Ipharm.Repository.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Entity\IFES.POO2.Ipharm.Repository.Common.Entity.csproj">
-      <Project>{9b528030-d02d-442e-9b1d-0a40ebdd91ac}</Project>
-      <Name>IFES.POO2.Ipharm.Repository.Common.Entity</Name>
+    <ProjectReference Include="..\IFES.POO2.Ipharm.Repository.Entity\IFES.POO2.Ipharm.Repository.Entity.csproj">
+      <Project>{1ceb2819-fed5-4040-a502-16aafdfba63a}</Project>
+      <Name>IFES.POO2.Ipharm.Repository.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -354,6 +362,8 @@
           <DevelopmentServerPort>63298</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:63298/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:63298/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -49,20 +49,15 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
         [Display(Name = "Login")]
         public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Lembrar-me?")]
         public bool RememberMe { get; set; }
     }
 

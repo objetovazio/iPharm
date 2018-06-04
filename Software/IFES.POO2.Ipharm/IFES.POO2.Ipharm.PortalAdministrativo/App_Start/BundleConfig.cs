@@ -9,7 +9,8 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/pnotify.custom.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,9 +25,9 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     // "~/Content/bootstrap.css",
                       "~/Content/bootstrap.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/pnotify.custom.min.css"));
         }
     }
 }

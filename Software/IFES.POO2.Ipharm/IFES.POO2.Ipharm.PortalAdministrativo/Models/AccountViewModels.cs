@@ -49,11 +49,13 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Models
     public class LoginViewModel
     {
         [Required]
+        [StringLength(20, ErrorMessage = "O {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]
         [Display(Name = "Login")]
         public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "A {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]
         [Display(Name = "Senha")]
         public string Password { get; set; }
 

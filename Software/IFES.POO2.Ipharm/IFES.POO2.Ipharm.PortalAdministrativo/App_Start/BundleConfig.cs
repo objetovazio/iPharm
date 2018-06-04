@@ -27,7 +27,8 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/site.css",
-                      "~/Content/pnotify.custom.min.css"));
+                      "~/Content/pnotify.custom.min.css",
+                      "~/Content/animate.css"));
         }
     }
 }

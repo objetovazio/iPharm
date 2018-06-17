@@ -8,10 +8,12 @@
     }
 );
 
-PNotify.prototype.options.delay ? (function () {
-    PNotify.prototype.options.delay -= 6000;
-    update_timer_display();
-}()) : (alert('Timer is already at zero.'))
+PNotify.prototype.options.delay
+    ? (function() {
+        PNotify.prototype.options.delay -= 6000;
+        //update_timer_display();
+    }())
+    : (alert('Timer is already at zero.'));
 
 function MessageNotice(title, text) {
     new PNotify({

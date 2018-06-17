@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
     var imgSrc = "Images/users/" + @User.Identity.GetUserId() + ".jpg";
+    if (!File.Exists(Server.MapPath(imgSrc))) imgSrc = "Images/users/default.png";
+
 }
 
 <div class="col-md-3 left_col">
@@ -26,11 +28,13 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <h3>Menu</h3>
-                <ul class="nav side-menu">
+                <ul class="nav side-menu" id="AdministracaoUl">
                     <li>
                         <a><i class="fa fa-home"></i> Administração <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="index2.html">Administradores</a></li>
+                            <li>
+                                @Html.ActionLink("Administradores", "Index", "Admin")
+                            </li>
                             <li><a href="index.html">Empresas</a></li>
                             <li><a href="index.html">Produtos</a></li>
                             <li><a href="index3.html">Usuários</a></li>

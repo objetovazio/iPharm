@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using IFES.POO2.Ipharm.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 

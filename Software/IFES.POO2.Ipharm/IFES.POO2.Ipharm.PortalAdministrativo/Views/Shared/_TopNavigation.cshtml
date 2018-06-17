@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @{ 
     var imgSrc = "Images/users/" + @User.Identity.GetUserId() + ".jpg";
+    if (!File.Exists(Server.MapPath(imgSrc))) imgSrc = "Images/users/default.png";
 }
 
 <div class="top_nav">

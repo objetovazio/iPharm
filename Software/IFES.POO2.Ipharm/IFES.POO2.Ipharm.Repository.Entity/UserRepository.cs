@@ -23,6 +23,20 @@ namespace IFES.POO2.Ipharm.Repository.Entity
             return context.Set<User>().FirstOrDefault(u => u.Login.Equals(login));
         }
 
-        
+        /// <summary>
+        /// Traz um User do login enviado
+        /// </summary>
+        /// <returns>Um User</returns>
+        public List<User> SelectAdmins()
+        {
+            return context.Set<User>().Where(user => user.IsAdministrator).ToList();
+        }
+
+        public bool IsActive(string login, bool isAdmin)
+        {
+            var user = SelectByLogin(login);
+            if (user != null) return isAdmin ? user.IsActive && user.IsAdministrator : user.IsActive;
+            return false;
+        }
     }
 }

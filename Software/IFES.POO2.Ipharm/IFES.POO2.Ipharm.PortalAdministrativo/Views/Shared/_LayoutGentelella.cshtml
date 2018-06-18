@@ -6,6 +6,7 @@
         sucessMessage = TempData["Success"].ToString();
         TempData["Success"] = null;
     }
+    
 }
 <!DOCTYPE html>
 <html>
@@ -127,8 +128,9 @@
 
     @if (!string.IsNullOrEmpty(sucessMessage))
     {
+        var message = sucessMessage.ToString();
         <script type="text/javascript">
-            MessageSuccess("Sucesso!", '@sucessMessage');
+            MessageSuccess("Sucesso!", @message);
         </script>
     }
 

@@ -16,7 +16,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : DefaultController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -148,7 +148,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 
                 if (found && userValidation.Id != id.Value.ToString())
                 {
-                    ModelState.AddModelError("", "Email já cadastrado.");
+                    MessageError("Email já cadastrado.");
                     return View(model);
                 }
 
@@ -166,7 +166,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                 await UserManager.UpdateAsync(user);
                 _userRepository.Update(domainUser);
 
-                TempData["Success"] = "Administrador atualizado com sucesso";
+                MessageSucess("Administrador atualizado com sucesso", "Administrador atualizado com sucesso", "Administrador atualizado com sucesso", "Administrador atualizado com sucesso");
 
                 return RedirectToAction("Index", "Admin");
             }

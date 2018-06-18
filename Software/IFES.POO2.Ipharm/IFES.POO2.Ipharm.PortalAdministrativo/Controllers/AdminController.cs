@@ -139,17 +139,35 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid? id, [Bind(Include = "Name,Email,IsActive")] ListAdminViewModel model)
+        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Login,Name,Email,IsActive")] ListAdminViewModel model)
         {
-
             if (ModelState.IsValid && id.HasValue)
             {
+                var userValidation = await UserManager.FindByEmailAsync(model.Email);
+                bool found = userValidation != null;
+
+                if (found && userValidation.Id != id.Value.ToString())
+                {
+                    ModelState.AddModelError("", "Email já cadastrado.");
+                    return View(model);
+                }
+
+                var user = found && userValidation.Id == id.Value.ToString() 
+                    ? userValidation 
+                    : await UserManager.FindByIdAsync(id.Value.ToString());
+
+                user.Email = model.Email;
+
                 User domainUser = _userRepository.SelectById(id.Value);
                 domainUser.Email = model.Email;
                 domainUser.IsActive = model.IsActive;
                 domainUser.Name = model.Name;
 
+                await UserManager.UpdateAsync(user);
                 _userRepository.Update(domainUser);
+
+                TempData["Success"] = "Administrador atualizado com sucesso";
+
                 return RedirectToAction("Index", "Admin");
             }
 

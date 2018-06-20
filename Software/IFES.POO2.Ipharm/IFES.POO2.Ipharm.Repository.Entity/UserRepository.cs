@@ -38,5 +38,6 @@ namespace IFES.POO2.Ipharm.Repository.Entity
             if (user != null) return isAdmin ? user.IsActive && user.IsAdministrator : user.IsActive;
             return false;
         }
+
     }
 }

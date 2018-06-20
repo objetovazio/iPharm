@@ -2,7 +2,6 @@
 @{
     var imgSrc = "Images/users/" + @User.Identity.GetUserId() + ".jpg";
     if (!File.Exists(Server.MapPath(imgSrc))) imgSrc = "Images/users/default.png";
-
 }
 
 <div class="col-md-3 left_col">

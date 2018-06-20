@@ -1,12 +1,16 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    string sucessMessage = null;
-    if (TempData["Success"] != null)
+    string successMessage = null;
+    string MessageType = null;
+
+    if (TempData["Message"] != null)
     {
-        sucessMessage = TempData["Success"].ToString();
-        TempData["Success"] = null;
+        successMessage = TempData["Message"].ToString();
+        MessageType = TempData["MessageType"].ToString();
+
+        //TempData["Message"] = TempData["MessageType"] = null;
     }
-    
+
 }
 <!DOCTYPE html>
 <html>
@@ -126,17 +130,14 @@
         </script>
     }
 
-    @if (!string.IsNullOrEmpty(sucessMessage))
+    @if (!string.IsNullOrEmpty(successMessage))
     {
-        var message = sucessMessage.ToString();
         <script type="text/javascript">
-            MessageSuccess("Sucesso!", @message);
+            var message = "@(successMessage)"
+            Message('@MessageType', message);
         </script>
     }
 
-@RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
-
-
-
 </html>

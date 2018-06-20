@@ -83,19 +83,21 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RegisterAdminViewModel model)
         {
+            User domainUser = Mapper.Map<RegisterAdminViewModel, User>(model);
+            _userRepository.Exists(domainUser);
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Login, Email = model.Email, EmailConfirmed = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    User domainUser = Mapper.Map<RegisterAdminViewModel, User>(model);
                     domainUser.IsAdministrator = true;
                     domainUser.IsActive = true;
                     domainUser.Id = new Guid(user.Id);
                     _userRepository.Insert(domainUser);
 
-                    TempData["Success"] = "O Administrador " + domainUser.Login + " foi criado!";
+                    base.Message(MessageType.Success, "O Administrador " + domainUser.Login + " foi criado!");
 
                     return RedirectToAction("Index", "Admin");
                 }
@@ -166,7 +168,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                 await UserManager.UpdateAsync(user);
                 _userRepository.Update(domainUser);
 
-                MessageSucess("Administrador atualizado com sucesso", "Administrador atualizado com sucesso", "Administrador atualizado com sucesso", "Administrador atualizado com sucesso");
+                base.Message(MessageType.Success, "Administrador atualizado com sucesso");
 
                 return RedirectToAction("Index", "Admin");
             }

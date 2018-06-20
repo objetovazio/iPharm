@@ -68,3 +68,10 @@ function MessageError(title, text) {
         }
     });
 }
+
+function Message(messageType, text) {
+    if (messageType === '1') MessageSuccess("Sucesso", text);
+    if (messageType === '2') MessageError("Error", text);
+    if (messageType === '3') MessageInfo("Info", text);
+    if (messageType === '4') MessageNotice("Aviso", text);
+}

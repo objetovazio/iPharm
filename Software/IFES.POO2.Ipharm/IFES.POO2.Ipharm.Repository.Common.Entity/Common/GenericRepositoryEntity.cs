@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.Repository.Common.Entity
 {
-    public class GenericRepositoryEntity<T, Key> : IGenericRepository<T, Key>
+    public class GenericRepositoryEntity<T, TKey> : IGenericRepository<T, TKey>
         where T : class
     {
         protected DbContext context;
@@ -31,7 +31,7 @@ namespace IFES.POO2.Ipharm.Repository.Common.Entity
         /// Deleta a entidade utilizando o id enviado como parametro
         /// </summary>
         /// <param name="entityKey">Id da entidade que será removida</param>
-        public void DeleteById(Key entityKey) => this.Delete(SelectById(entityKey));
+        public void DeleteById(TKey entityKey) => this.Delete(SelectById(entityKey));
 
         /// <summary>
         /// Insere uma entidade no banco
@@ -54,7 +54,7 @@ namespace IFES.POO2.Ipharm.Repository.Common.Entity
         /// </summary>
         /// <param name="id">Id do elemento</param>
         /// <returns>Elemento T que pertence ao Id</returns>
-        public T SelectById(Key id) => context.Set<T>().Find(id);
+        public T SelectById(TKey id) => context.Set<T>().Find(id);
 
         /// <summary>
         /// Atualiza o elemento enviado como parametro no banco de dados

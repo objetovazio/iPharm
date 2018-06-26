@@ -13,9 +13,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         {
             // Key
             Property(p => p.Id)
-                .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-
+                .IsRequired();
             //Other Fields
             Property(p => p.Latitude)
                 .IsRequired();

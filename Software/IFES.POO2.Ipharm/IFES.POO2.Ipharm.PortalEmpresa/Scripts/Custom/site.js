@@ -1,34 +1,31 @@
-﻿function Lock() {
-    $(this).siblings().andSelf().fadeOut();
-    $('body').fadeIn();
-};
+﻿var postUrl = '';
 
-function Unlock() {
-    $('body').fadeOut();
-    $(this).closest('div').siblings().fadeIn();
-};
+function getLocation(url) {
+    postUrl = url;
 
-function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(savePosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
-function savePosition(position) {
-    if (position.coords.latitude === undefined || position.coords.longitude === undefined) Lock();
-    Message("1", "Position: " + position.coords.latitude + " " + position.coords.longitude);
+function showPosition(position) {
+
+    $.ajax({
+        type: "POST",
+        url: postUrl,
+        data: JSON.stringify({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            $('#location').html("" + position.coords.latitude + " " + position.coords.longitude);
+        },
+        error: function (xhr, err) {
+            alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+            alert("responseText: " + xhr.responseText);
+        }
+    });
 }
-
-$(document).ready(function () {
-    navigator.geolocation.watchPosition(function (position) {
-        savePosition(position);
-    },
-        function (error) {
-            if (error.code == error.PERMISSION_DENIED)
-                Lock();
-        });
-
-    //getLocation();
-});

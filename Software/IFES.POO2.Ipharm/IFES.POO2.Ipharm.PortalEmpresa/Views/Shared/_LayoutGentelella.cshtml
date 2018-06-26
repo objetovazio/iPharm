@@ -97,6 +97,9 @@
                 <div class="pull-right">
                     Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
                 </div>
+                <div id="location">
+                    a
+                </div>
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
@@ -137,7 +140,14 @@
             var message = "@(successMessage)"
             Message('@MessageType', message);
         </script>
-    }]
+    }
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        getLocation('@Url.Action("SaveLocation", "Account")');
+    });
+</script>
+
 
 @RenderSection("scripts", required: false)
 </body>

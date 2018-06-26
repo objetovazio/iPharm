@@ -20,19 +20,6 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private readonly UserRepository _userRepository = new UserRepository(new IpharmContext());
-
-        private User _currentUser;
-
-        public User CurrentUser
-        {
-            get
-            {
-                if (_currentUser == null) _currentUser = _userRepository.SelectById(Guid.Parse(User.Identity.GetUserId()));
-                return _currentUser;
-            }
-        }
-
 
         public ApplicationSignInManager SignInManager
         {
@@ -60,7 +47,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            var users = _userRepository.SelectAdmins();
+            var users = UserRepository.SelectAdmins();
 
             users.Remove(CurrentUser);
 
@@ -95,7 +82,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                     domainUser.IsAdministrator = true;
                     domainUser.IsActive = true;
                     domainUser.Id = new Guid(user.Id);
-                    _userRepository.Insert(domainUser);
+                    UserRepository.Insert(domainUser);
 
                     base.Message(MessageType.Success, "O Administrador " + domainUser.Login + " foi criado!");
 
@@ -124,7 +111,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = _userRepository.SelectById((Guid)id);
+            var user = UserRepository.SelectById((Guid)id);
 
             if (user == null)
             {
@@ -160,13 +147,13 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 
                 user.Email = model.Email;
 
-                User domainUser = _userRepository.SelectById(id.Value);
+                User domainUser = UserRepository.SelectById(id.Value);
                 domainUser.Email = model.Email;
                 domainUser.IsActive = model.IsActive;
                 domainUser.Name = model.Name;
 
                 await UserManager.UpdateAsync(user);
-                _userRepository.Update(domainUser);
+                UserRepository.Update(domainUser);
 
                 base.Message(MessageType.Success, "Administrador atualizado com sucesso");
 

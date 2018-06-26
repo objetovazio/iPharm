@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201806260023054_Migracao1.Designer.cs">
       <DependentUpon>201806260023054_Migracao1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806262256311_Migration2.cs" />
+    <Compile Include="Migrations\201806262256311_Migration2.Designer.cs">
+      <DependentUpon>201806262256311_Migration2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
     <Compile Include="Context\IpharmContext.cs" />
@@ -110,6 +114,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806260023054_Migracao1.resx">
       <DependentUpon>201806260023054_Migracao1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806262256311_Migration2.resx">
+      <DependentUpon>201806262256311_Migration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

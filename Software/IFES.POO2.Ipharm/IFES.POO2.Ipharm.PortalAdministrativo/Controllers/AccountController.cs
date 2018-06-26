@@ -78,6 +78,12 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                 return View(model);
             }
 
+            if (!userRepository.Exists(model.Login))
+            {
+                ModelState.AddModelError("", "Este usuário não existe.");
+                return View(model);
+            }
+
             if (!userRepository.IsActive(model.Login, true))
             {
                 ModelState.AddModelError("", "Este usuário está desabilitado ou não é administrador.");

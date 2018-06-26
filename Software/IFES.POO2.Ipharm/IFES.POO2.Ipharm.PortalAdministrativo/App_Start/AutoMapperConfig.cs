@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using IFES.POO2.Ipharm.PortalAdministrativo.AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace TreinaWeb.Musicas.Web.App_Start
+namespace IFES.POO2.Ipharm.PortalAdministrativo
 {
     public static class AutoMapperConfig
     {

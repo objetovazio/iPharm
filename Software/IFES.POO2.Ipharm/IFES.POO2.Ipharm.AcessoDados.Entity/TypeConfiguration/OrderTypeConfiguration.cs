@@ -1,8 +1,6 @@
-﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration;
-using IFES.POO2.Ipharm.Domain;
-using System.Data.Entity.ModelConfiguration;
+﻿using IFES.POO2.Ipharm.Domain;
 
-namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
+namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
     public class OrderTypeConfiguration : IpharmEntityAbstractConfiguration<Order>
     {

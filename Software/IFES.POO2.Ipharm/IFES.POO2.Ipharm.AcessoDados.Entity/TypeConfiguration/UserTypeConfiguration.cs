@@ -13,7 +13,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         {
             Property(p => p.Id)
                 .IsRequired();
-                //.HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(p => p.Login)
                 .IsRequired()

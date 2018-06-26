@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
+using IFES.POO2.Ipharm.PortalEmpresa.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using IFES.POO2.Ipharm.PortalEmpresa.Models;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa
 {
@@ -40,7 +36,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -51,6 +47,17 @@ namespace IFES.POO2.Ipharm.PortalEmpresa
             };
 
             // Configure validation logic for passwords
+#if DEBUG
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+#else
+
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
@@ -59,6 +66,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
+#endif
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
@@ -81,7 +89,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

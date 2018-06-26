@@ -84,7 +84,7 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
         public async Task<ActionResult> Create(RegisterAdminViewModel model)
         {
             User domainUser = Mapper.Map<RegisterAdminViewModel, User>(model);
-            _userRepository.Exists(domainUser);
+            //_userRepository.Exists(domainUser);
 
             if (ModelState.IsValid)
             {

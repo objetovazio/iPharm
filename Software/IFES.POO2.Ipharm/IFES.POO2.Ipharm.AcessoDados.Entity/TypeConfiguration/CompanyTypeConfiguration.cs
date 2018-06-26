@@ -1,8 +1,6 @@
-﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration;
-using IFES.POO2.Ipharm.Domain;
-using System.Data.Entity.ModelConfiguration;
+﻿using IFES.POO2.Ipharm.Domain;
 
-namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
+namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
     internal class CompanyTypeConfiguration : IpharmEntityAbstractConfiguration<Company>
     {
@@ -15,14 +13,10 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
         {
             // Key
             Property(p => p.Id)
-                .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+                .IsRequired();
 
             //Other Fields
             Property(p => p.Cnpj)
-                .IsRequired();
-
-            Property(p => p.CompanyName)
                 .IsRequired();
         }
 

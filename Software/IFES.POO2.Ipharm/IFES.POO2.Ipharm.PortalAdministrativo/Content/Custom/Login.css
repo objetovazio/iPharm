@@ -61,6 +61,15 @@
         display: none;
     }
 
+    .form .cabecalho-login {
+        color: #999;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        text-align: center;
+    }
+
 .container {
     position: relative;
     z-index: 1;
@@ -103,11 +112,12 @@
 
 body {
     background-image: url('../../Images/background-adm.jpg');
-    /*background: #76b852; /* fallback for old browsers */ */
-    /*background: -webkit-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: -moz-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: -o-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: linear-gradient(to left, #76b852, #8DC26F);*/
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

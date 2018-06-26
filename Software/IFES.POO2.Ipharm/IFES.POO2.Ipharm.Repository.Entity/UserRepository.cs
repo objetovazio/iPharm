@@ -39,5 +39,9 @@ namespace IFES.POO2.Ipharm.Repository.Entity
             return false;
         }
 
+        public bool Exists(string login)
+        {
+            return Select().Any(u => u.Login.Equals(login));
+        }
     }
 }

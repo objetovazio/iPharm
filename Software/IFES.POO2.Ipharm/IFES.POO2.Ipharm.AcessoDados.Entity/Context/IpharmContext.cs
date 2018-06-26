@@ -25,8 +25,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 
         public IpharmContext()
         {
-            Configuration.LazyLoadingEnabled = false; // Para não carregar objetos relacionados sem necessidade
-            Configuration.ProxyCreationEnabled = false; // Para não criar um proxy de objeto (Simula uma cópia do meu objeto original)
+            //Configuration.LazyLoadingEnabled = false; // Para não carregar objetos relacionados sem necessidade
+            //Configuration.ProxyCreationEnabled = false; // Para não criar um proxy de objeto (Simula uma cópia do meu objeto original)
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

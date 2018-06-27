@@ -7,13 +7,13 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Migration2 : IMigrationMetadata
+    public sealed partial class mig : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(mig));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806262256311_Migration2"; }
+            get { return "201806271607133_mig"; }
         }
         
         string IMigrationMetadata.Source

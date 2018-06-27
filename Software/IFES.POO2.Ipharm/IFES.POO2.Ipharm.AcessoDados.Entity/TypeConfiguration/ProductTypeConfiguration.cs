@@ -28,6 +28,9 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             Property(p => p.HasControl)
                 .IsRequired();
+
+            Property(p => p.IsDeleted)
+                .IsRequired();
         }
 
         protected override void PrimaryKeyConfiguration()

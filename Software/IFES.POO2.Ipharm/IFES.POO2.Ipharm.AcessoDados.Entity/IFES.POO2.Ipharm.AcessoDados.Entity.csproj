@@ -62,13 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201806260023054_Migracao1.cs" />
-    <Compile Include="Migrations\201806260023054_Migracao1.Designer.cs">
-      <DependentUpon>201806260023054_Migracao1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806262256311_Migration2.cs" />
-    <Compile Include="Migrations\201806262256311_Migration2.Designer.cs">
-      <DependentUpon>201806262256311_Migration2.cs</DependentUpon>
+    <Compile Include="Migrations\201806271607133_mig.cs" />
+    <Compile Include="Migrations\201806271607133_mig.Designer.cs">
+      <DependentUpon>201806271607133_mig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
@@ -112,11 +108,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806260023054_Migracao1.resx">
-      <DependentUpon>201806260023054_Migracao1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806262256311_Migration2.resx">
-      <DependentUpon>201806262256311_Migration2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806271607133_mig.resx">
+      <DependentUpon>201806271607133_mig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

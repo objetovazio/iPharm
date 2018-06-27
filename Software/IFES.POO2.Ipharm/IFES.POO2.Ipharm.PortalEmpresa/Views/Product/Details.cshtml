@@ -43,9 +43,19 @@
             @Html.DisplayFor(model => model.HasControl)
         </dd>
 
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
     </dl>
 </div>
 <p>
+    @using (Html.BeginForm("Delete", "Product", new { Model.Id }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Delete" class="btn btn-default" />
+    }
+
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

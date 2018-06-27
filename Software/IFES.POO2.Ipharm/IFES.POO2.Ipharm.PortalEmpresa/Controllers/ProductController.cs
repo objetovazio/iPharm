@@ -16,19 +16,19 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
     public class ProductController : DefaultController
     {
-        private GenericRepositoryEntity<Product, int>
-            _repository = new GenericRepositoryEntity<Product, int>(Context);
+        private GenericRepositoryEntity<Product, Guid>
+            _repository = new GenericRepositoryEntity<Product, Guid>(Context);
 
         // GET: Product
         public ActionResult Index()
         {
             List<ProductViewModel> products =
-                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select());
+                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select().Where(p => p.Company == CurrentUser.Company).ToList());
             return View(products);
         }
 
         // GET: Product/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
@@ -59,6 +59,9 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
             {
                 product.Company = CurrentUser.Company;
                 _repository.Insert(product);
+
+                Message(MessageType.Success, "Produto criado.");
+
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +69,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         }
 
         // GET: Product/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
@@ -103,7 +106,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         }
 
         // GET: Product/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
@@ -120,9 +123,11 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
-            _repository.DeleteById(id);
+            var product = _repository.SelectById(id);
+            product.IsDeleted = true;
+            _repository.Update(product);
             return RedirectToAction("Index");
         }
     }

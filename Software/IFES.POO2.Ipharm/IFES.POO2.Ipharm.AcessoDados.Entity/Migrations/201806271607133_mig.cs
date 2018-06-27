@@ -3,7 +3,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Migracao1 : DbMigration
+    public partial class mig : DbMigration
     {
         public override void Up()
         {
@@ -77,7 +77,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         ItemValue = c.Decimal(nullable: false, precision: 18, scale: 2),
                         ItemDescount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Order_Id = c.Int(nullable: false),
-                        Product_Id = c.Int(nullable: false),
+                        Product_Id = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Order", t => t.Order_Id, cascadeDelete: true)
@@ -89,11 +89,12 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                 "dbo.Product",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Value = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Description = c.String(nullable: false),
                         HasControl = c.Boolean(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                         Company_Id = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -163,7 +164,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                 "dbo.Localization",
                 c => new
                     {
-                        Id = c.Guid(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Latitude = c.Single(nullable: false),
                         Longitude = c.Single(nullable: false),
                     })

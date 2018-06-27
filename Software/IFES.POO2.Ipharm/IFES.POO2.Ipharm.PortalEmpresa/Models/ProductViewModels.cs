@@ -5,7 +5,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Models
 {
     public class ProductViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "O {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]
@@ -25,5 +25,9 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Models
         [Required]
         [Display(Name = "Medicamento Controlado")]
         public bool HasControl { get; set; }
+
+        [Required]
+        [Display(Name = "Excluído")]
+        public bool IsDeleted { get; set; }
     }
 }

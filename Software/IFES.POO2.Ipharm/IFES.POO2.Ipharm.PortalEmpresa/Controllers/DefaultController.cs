@@ -21,23 +21,26 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 
     public class DefaultController : Controller
     {
+        private static IpharmContext _ipharmContext = new IpharmContext();
+
+        public static IpharmContext Context
+        {
+            get { return _ipharmContext ?? (_ipharmContext = new IpharmContext()); }
+        }
+
+
         private User _currentUser;
         private UserRepository _userRepository;
 
         public UserRepository UserRepository
         {
-            get
-            {
-                if (_userRepository == null) _userRepository = new UserRepository(new IpharmContext());
-                return _userRepository;
-            }
+            get { return _userRepository ?? (_userRepository = new UserRepository(Context)); }
         }
         public User CurrentUser
         {
             get
             {
-                if (_currentUser == null) _currentUser = UserRepository.SelectById(Guid.Parse(User.Identity.GetUserId()));
-                return _currentUser;
+                return _currentUser ?? (_currentUser = UserRepository.SelectById(Guid.Parse(User.Identity.GetUserId())));
             }
         }
 
@@ -48,7 +51,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         /// <param name="messages"></param>
         public void Message(MessageType messageType, params string[] messages)
         {
-            TempData["MessageType"] = (int) messageType;
+            TempData["MessageType"] = (int)messageType;
             foreach (var message in messages)
             {
                 TempData["Message"] += message + "\\\n";

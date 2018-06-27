@@ -24,8 +24,7 @@ function showPosition(position) {
             $('#location').html("" + position.coords.latitude + " " + position.coords.longitude);
         },
         error: function (xhr, err) {
-            alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
-            alert("responseText: " + xhr.responseText);
+            location.reload();
         }
     });
 }

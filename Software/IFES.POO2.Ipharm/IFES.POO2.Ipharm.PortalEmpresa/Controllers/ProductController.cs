@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using AutoMapper;
+using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
+using IFES.POO2.Ipharm.Domain;
+using IFES.POO2.Ipharm.PortalEmpresa.Models;
+using IFES.POO2.Ipharm.Repository.Common.Entity;
+
+namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
+{
+    public class ProductController : DefaultController
+    {
+        private GenericRepositoryEntity<Product, int>
+            _repository = new GenericRepositoryEntity<Product, int>(Context);
+
+        // GET: Product
+        public ActionResult Index()
+        {
+            List<ProductViewModel> products =
+                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select());
+            return View(products);
+        }
+
+        // GET: Product/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = _repository.SelectById(id.Value);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // GET: Product/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Product/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Value,Description,HasControl")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                product.Company = CurrentUser.Company;
+                _repository.Insert(product);
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
+        }
+
+        // GET: Product/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = _repository.SelectById(id.Value);
+            ProductViewModel productView = Mapper.Map<Product, ProductViewModel>(product);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productView);
+        }
+
+        // POST: Product/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Value,Description,HasControl")] ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Product p = _repository.SelectById(model.Id);
+                p.Name = model.Name;
+                p.Value = model.Value;
+                p.HasControl = model.HasControl;
+                p.Description = model.Description;
+
+                _repository.Update(p);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        // GET: Product/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = _repository.SelectById(id.Value);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // POST: Product/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            _repository.DeleteById(id);
+            return RedirectToAction("Index");
+        }
+    }
+}

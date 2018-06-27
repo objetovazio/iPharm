@@ -27,12 +27,12 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <h3>Menu</h3>
-                <ul class="nav side-menu" id="AdministracaoUl">
+                <ul class="nav side-menu">
                     <li>
-                        <a><i class="fa fa-home"></i> Administração <span class="fa fa-chevron-down"></span></a>
+                        <a id="AdministracaoUl"><i class="fa fa-home"></i> Administração <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li>
-                                @Html.ActionLink("Administradores", "Index", "Admin")
+                                @Html.ActionLink("Meus Produtos", "Index", "Product")
                             </li>
                             <li><a href="index.html">Empresas</a></li>
                             <li><a href="index.html">Produtos</a></li>
@@ -61,3 +61,4 @@
         <!-- /menu footer buttons -->
     </div>
 </div>
+

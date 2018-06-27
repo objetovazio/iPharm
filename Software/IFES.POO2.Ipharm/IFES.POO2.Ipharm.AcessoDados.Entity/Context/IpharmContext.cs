@@ -43,5 +43,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
             modelBuilder.Configurations.Add(new UserTypeConfiguration());
             modelBuilder.Configurations.Add(new ReviewTypeConfiguration());
         }
+
     }
 }

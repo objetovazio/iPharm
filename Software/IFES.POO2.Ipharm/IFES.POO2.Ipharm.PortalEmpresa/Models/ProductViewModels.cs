@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa.Models
 {
-    public class ProductViewModels
+    public class ProductViewModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "O {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]

@@ -9,6 +9,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.AutoMapper
         public DomainToViewModel()
         {
             CreateMap<User, RegisterViewModel>();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }

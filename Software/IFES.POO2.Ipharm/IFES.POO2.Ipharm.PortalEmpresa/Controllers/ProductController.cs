@@ -32,7 +32,8 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Message(MessageType.Error, "É necessário selecionar um produto.");
+                return RedirectToAction("Index");
             }
             Product product = _repository.SelectById(id.Value);
             if (product == null)
@@ -73,7 +74,8 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Message(MessageType.Error, "É necessário selecionar um produto.");
+                return RedirectToAction("Index");
             }
             Product product = _repository.SelectById(id.Value);
             ProductViewModel productView = Mapper.Map<Product, ProductViewModel>(product);
@@ -110,7 +112,8 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Message(MessageType.Error, "É necessário selecionar um produto.");
+                return RedirectToAction("Index");
             }
             Product product = _repository.SelectById(id.Value);
             if (product == null)

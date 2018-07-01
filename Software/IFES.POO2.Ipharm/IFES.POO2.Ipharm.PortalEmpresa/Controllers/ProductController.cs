@@ -41,19 +41,21 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Value,Description,HasControl")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Value,Description,HasControl")] ProductCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                Product product = Mapper.Map<ProductCreateViewModel, Product>(model);
+
                 product.Company = CurrentUser(_context).Company;
                 _repository.Insert(product);
 
-                Message(MessageType.Success, "Produto criado.");
+                Message(MessageType.Success, "Produto criado com sucesso.");
 
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(model);
         }
 
         // GET: Product/Edit/5
@@ -92,6 +94,25 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 _repository.Update(p);
                 return RedirectToAction("Index");
             }
+            return View(model);
+        }
+
+        // GET: Product/Details/5
+        public ActionResult Details(Guid? id)
+        {
+            if (id == null)
+            {
+                Message(MessageType.Error, "É necessário selecionar um produto.");
+                return RedirectToAction("Index");
+            }
+
+            Product product = _repository.SelectById(id.Value);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = Mapper.Map<Product, ProductDetailsViewModel>(product);
             return View(model);
         }
 

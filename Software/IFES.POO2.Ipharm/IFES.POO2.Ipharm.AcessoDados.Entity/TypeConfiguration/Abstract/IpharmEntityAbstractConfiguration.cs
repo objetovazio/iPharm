@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 
-namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
+namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration.Abstract
 {
     public abstract class IpharmEntityAbstractConfiguration<T> : EntityTypeConfiguration<T>
         where T : class
     {
-        public IpharmEntityAbstractConfiguration()
+        protected IpharmEntityAbstractConfiguration()
         {
             TableNameConfiguration();
             TableFieldConfiguration();

@@ -1,4 +1,5 @@
-﻿using IFES.POO2.Ipharm.Domain;
+﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration.Abstract;
+using IFES.POO2.Ipharm.Domain;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
@@ -13,8 +14,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         {
             // Key
             Property(p => p.Id)
-                .IsRequired()
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+                .IsRequired();
 
             //Other Fields
             Property(p => p.Cpf)
@@ -22,8 +22,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             Property(p => p.Birthday)
                 .IsRequired();
-
-
         }
 
         protected override void PrimaryKeyConfiguration()

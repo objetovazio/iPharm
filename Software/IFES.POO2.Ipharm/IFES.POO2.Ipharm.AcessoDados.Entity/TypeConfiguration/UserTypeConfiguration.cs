@@ -1,4 +1,5 @@
-﻿using IFES.POO2.Ipharm.Domain;
+﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration.Abstract;
+using IFES.POO2.Ipharm.Domain;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {
@@ -43,10 +44,6 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             HasKey(p => p.Id);
         }
 
-        protected override void ForeignKeyConfiguration()
-        {
-        }
-
-
+        protected override void ForeignKeyConfiguration() { }
     }
 }

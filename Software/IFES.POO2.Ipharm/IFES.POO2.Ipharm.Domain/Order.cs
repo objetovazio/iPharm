@@ -22,10 +22,12 @@ namespace IFES.POO2.Ipharm.Domain
 
     public enum EnumOrderStatus
     {
-        Feito = 1,
-        Confirmado = 2,
-        Pronto = 3,
-        Enviado = 4,
-        Entregue = 5
+        Cancelado = 0,
+        Carrinho = 1,
+        Solicitado = 2,
+        Confirmado = 3,
+        ProntoParaEnvio = 4,
+        Enviado = 5,
+        Entregue = 6
     }
 }

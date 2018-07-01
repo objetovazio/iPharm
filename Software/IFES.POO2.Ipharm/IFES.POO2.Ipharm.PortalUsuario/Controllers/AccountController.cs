@@ -9,20 +9,28 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IFES.POO2.Ipharm.PortalUsuario.Models;
+using IFES.POO2.Ipharm.Domain;
+using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
+using AutoMapper;
+using IFES.POO2.Ipharm.Repository.Entity;
+using IFES.POO2.Ipharm.Repository.Common.Entity;
 
 namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DefaultController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
-        {
-        }
+        { }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        private static IpharmContext _context = new IpharmContext();
+
+        private UserRepository _userRepository = new UserRepository(_context);
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +42,9 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -61,6 +69,23 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpPost]
+        public void SaveLocation(float latitude, float longitude)
+        {
+            Localization localization = CurrentUser(_context).Localization;
+
+            if (localization.Latitude == latitude && localization.Longitude == longitude)
+                return;
+
+            var curUser = CurrentUser(_context);
+
+            localization.Latitude = latitude;
+            localization.Longitude = longitude;
+            curUser.Localization = localization;
+            _userRepository.Update(curUser);
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -73,9 +98,21 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
                 return View(model);
             }
 
+            if (!_userRepository.Exists(model.Login))
+            {
+                ModelState.AddModelError("", "Este usuário não existe.");
+                return View(model);
+            }
+
+            if (!_userRepository.IsActive(model.Login, false))
+            {
+                ModelState.AddModelError("", "Este usuário está desabilitado.");
+                return View(model);
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -86,50 +123,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
-
-        //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
-        {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Login ou Senha incorretos.");
                     return View(model);
             }
         }
@@ -151,18 +145,26 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Login, Email = model.Email, EmailConfirmed = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    User domainUser = Mapper.Map<RegisterViewModel, User>(model);
+                    domainUser.IsAdministrator = false;
+                    domainUser.IsActive = true;
+                    domainUser.Id = new Guid(user.Id);
+                    domainUser.Localization = new Localization(domainUser.Id);
+
+                    Person person = Mapper.Map<RegisterViewModel, Person>(model);
+                    person.Id = domainUser.Id;
+                    person.Cpf = model.Cpf;
+                    domainUser.Person = person;
+
+                    _userRepository.Insert(domainUser);
+
+                    Message(MessageType.Success, "Cadastrado concluído com sucesso!");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -170,19 +172,6 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         //
@@ -202,19 +191,19 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                //For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                //Send an email with this link
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(user.Id, "iPharm - Recuperar Senha", "Para alterar sua senha clique <a href=\"" + callbackUrl + "\">neste link</a>.");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -295,26 +284,6 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //

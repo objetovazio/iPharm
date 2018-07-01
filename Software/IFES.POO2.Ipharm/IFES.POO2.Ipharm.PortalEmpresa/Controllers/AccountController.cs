@@ -159,10 +159,12 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                     
                     Company company = Mapper.Map<RegisterViewModel, Company>(model);
                     company.Id = domainUser.Id;
+                    company.Cnpj = model.Cnpj;
                     domainUser.Company = company;
 
                     _userRepository.Insert(domainUser);
 
+                    Message(MessageType.Success, "Cadastrado concluído com sucesso!");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

@@ -1,4 +1,5 @@
-﻿using IFES.POO2.Ipharm.Domain;
+﻿using IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration.Abstract;
+using IFES.POO2.Ipharm.Domain;
 
 namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 {

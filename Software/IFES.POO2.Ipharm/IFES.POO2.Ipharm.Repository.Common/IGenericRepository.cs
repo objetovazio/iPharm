@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IFES.POO2.Ipharm.Repository.Common
 {
-    public interface IGenericRepository<T, Key> where T : class
+    public interface IGenericRepository<T, TKey> where T : class
     {
         List<T> Select();
-        T SelectById(Key id);
+        T SelectById(TKey id);
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void DeleteById(Key entity);
+        void DeleteById(TKey entity);
     }
 }

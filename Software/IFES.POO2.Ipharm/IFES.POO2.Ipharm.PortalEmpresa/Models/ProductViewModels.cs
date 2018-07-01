@@ -7,18 +7,34 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Models
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Nome do Produto")]
+        public string Name { get; set; }
+
+        [Display(Name = "Preço")]
+        public decimal Value { get; set; }
+
+        [Display(Name = "Medicamento Controlado")]
+        public bool HasControl { get; set; }
+
+        [Display(Name = "Ativo")]
+        public bool IsDeleted { get; set; }
+    }
+
+    public class ProductEditViewModel
+    {
+        public Guid Id { get; set; }
+
         [Required]
-        [StringLength(20, ErrorMessage = "O {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "O {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 6)]
         [Display(Name = "Nome do Produto")]
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
         [Display(Name = "Preço")]
         public decimal Value { get; set; }
 
         [Required]
-        [StringLength(300, ErrorMessage = "A {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 50)]
+        [StringLength(300, ErrorMessage = "A {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 20)]
         [Display(Name = "Descrição do Produto")]
         public string Description { get; set; }
 
@@ -27,7 +43,9 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Models
         public bool HasControl { get; set; }
 
         [Required]
-        [Display(Name = "Excluído")]
+        [Display(Name = "Excluir")]
         public bool IsDeleted { get; set; }
     }
+
+
 }

@@ -18,7 +18,7 @@ using IFES.POO2.Ipharm.Repository.Common.Entity;
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DefaultController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -136,6 +136,8 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
                     domainUser.IsActive = true;
                     domainUser.Id = new Guid(user.Id);
                     userRepository.Insert(domainUser);
+
+                    Message(MessageType.Success, "Cadastrado concluído com sucesso.");
 
                     return RedirectToAction("Index", "Home");
                 }

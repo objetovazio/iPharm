@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<IFES.POO2.Ipharm.PortalEmpresa.Models.ProductViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Produtos";
     Layout = "~/Views/Shared/_LayoutGentelella.cshtml";
+    string ativeClass = "fa fa-check-circle";
+    string deactiveClass = "fa fa-times-circle";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <p class="alignright">
+        @Html.ActionLink("+ Criar Novo", "Create", "Product", new { @class = "btn btn-info" })
+    </p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -19,34 +22,48 @@
             @Html.DisplayNameFor(model => model.Value)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.HasControl)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HasControl)
+            @Html.DisplayNameFor(model => model.IsDeleted)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HasControl)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @if (!item.HasControl)
+                {
+                    <i class="@deactiveClass" style="color:red"></i>
+                }
+                else
+                {
+                    <i class="@ativeClass" style="color:green"></i>
+                }
+            </td>
+            <td>
+                @if (item.IsDeleted)
+                {
+                    <i class="@deactiveClass" style="color:red"></i>
+                }
+                else
+                {
+                    <i class="@ativeClass" style="color:green"></i>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) 
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) 
+            </td>
+        </tr>
+    }
 
 </table>

@@ -17,6 +17,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             //Other Fields
             Property(p => p.Cnpj)
+                .HasMaxLength(18)
                 .IsRequired();
         }
 

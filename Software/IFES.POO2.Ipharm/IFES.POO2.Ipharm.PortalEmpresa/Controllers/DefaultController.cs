@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,27 +22,11 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 
     public class DefaultController : Controller
     {
-        private static IpharmContext _ipharmContext = new IpharmContext();
-
-        public static IpharmContext Context
-        {
-            get { return _ipharmContext ?? (_ipharmContext = new IpharmContext()); }
-        }
-
-
         private User _currentUser;
-        private UserRepository _userRepository;
 
-        public UserRepository UserRepository
+        public User CurrentUser(IpharmContext context)
         {
-            get { return _userRepository ?? (_userRepository = new UserRepository(Context)); }
-        }
-        public User CurrentUser
-        {
-            get
-            {
-                return _currentUser ?? (_currentUser = UserRepository.SelectById(Guid.Parse(User.Identity.GetUserId())));
-            }
+                return _currentUser ?? (_currentUser = new UserRepository(context).SelectById(Guid.Parse(User.Identity.GetUserId())));   
         }
 
         /// <summary>

@@ -15,6 +15,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.AutoMapper
             CreateMap<RegisterViewModel, User>();
             CreateMap<RegisterViewModel, Company>();
             CreateMap<ProductViewModel, Product>();
+            CreateMap<ProductEditViewModel, Product>();
         }
     }
 }

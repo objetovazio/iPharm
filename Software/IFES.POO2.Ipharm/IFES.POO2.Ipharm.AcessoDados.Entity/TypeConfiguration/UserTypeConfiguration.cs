@@ -29,7 +29,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
             Property(p => p.Phone)
                 .IsRequired()
-                .HasMaxLength(11);
+                .HasMaxLength(15);
 
             Property(p => p.IsActive)
                 .IsRequired();

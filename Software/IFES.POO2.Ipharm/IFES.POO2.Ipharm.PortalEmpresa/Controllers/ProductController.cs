@@ -11,36 +11,23 @@ using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using IFES.POO2.Ipharm.Domain;
 using IFES.POO2.Ipharm.PortalEmpresa.Models;
 using IFES.POO2.Ipharm.Repository.Common.Entity;
+using IFES.POO2.Ipharm.Repository.Common.Entity.Common;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
     public class ProductController : DefaultController
     {
+        private static IpharmContext _context = new IpharmContext();
+
         private GenericRepositoryEntity<Product, Guid>
-            _repository = new GenericRepositoryEntity<Product, Guid>(Context);
+            _repository = new GenericRepositoryEntity<Product, Guid>(_context);
 
         // GET: Product
         public ActionResult Index()
         {
             List<ProductViewModel> products =
-                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select().Where(p => p.Company == CurrentUser.Company).ToList());
+                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select().Where(p => p.Company == CurrentUser(_context).Company).ToList());
             return View(products);
-        }
-
-        // GET: Product/Details/5
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
-            {
-                Message(MessageType.Error, "É necessário selecionar um produto.");
-                return RedirectToAction("Index");
-            }
-            Product product = _repository.SelectById(id.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
         }
 
         // GET: Product/Create
@@ -58,7 +45,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         {
             if (ModelState.IsValid)
             {
-                product.Company = CurrentUser.Company;
+                product.Company = CurrentUser(_context).Company;
                 _repository.Insert(product);
 
                 Message(MessageType.Success, "Produto criado.");
@@ -78,7 +65,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 return RedirectToAction("Index");
             }
             Product product = _repository.SelectById(id.Value);
-            ProductViewModel productView = Mapper.Map<Product, ProductViewModel>(product);
+            ProductEditViewModel productView = Mapper.Map<Product, ProductEditViewModel>(product);
             if (product == null)
             {
                 return HttpNotFound();
@@ -91,7 +78,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Value,Description,HasControl")] ProductViewModel model)
+        public ActionResult Edit([Bind(Include = "Id,Name,Value,Description,HasControl,IsDeleted")] ProductEditViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +87,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 p.Value = model.Value;
                 p.HasControl = model.HasControl;
                 p.Description = model.Description;
+                p.IsDeleted = model.IsDeleted;
 
                 _repository.Update(p);
                 return RedirectToAction("Index");
@@ -115,12 +103,9 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 Message(MessageType.Error, "É necessário selecionar um produto.");
                 return RedirectToAction("Index");
             }
-            Product product = _repository.SelectById(id.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            _repository.DeleteById(id.Value);
+
+            return RedirectToAction("Index", "Product");
         }
 
         // POST: Product/Delete/5

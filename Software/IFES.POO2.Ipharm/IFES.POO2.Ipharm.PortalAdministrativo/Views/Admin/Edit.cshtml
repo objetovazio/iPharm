@@ -9,10 +9,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+
         <div class="HiddenMessage">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         </div>
-        
+
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">

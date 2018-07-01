@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201806271607133_mig.Designer.cs">
       <DependentUpon>201806271607133_mig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807010734104_mig2.cs" />
+    <Compile Include="Migrations\201807010734104_mig2.Designer.cs">
+      <DependentUpon>201807010734104_mig2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807010738347_mig3.cs" />
+    <Compile Include="Migrations\201807010738347_mig3.Designer.cs">
+      <DependentUpon>201807010738347_mig3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
     <Compile Include="Context\IpharmContext.cs" />
@@ -110,6 +118,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806271607133_mig.resx">
       <DependentUpon>201806271607133_mig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807010734104_mig2.resx">
+      <DependentUpon>201807010734104_mig2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807010738347_mig3.resx">
+      <DependentUpon>201807010738347_mig3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IFES.POO2.Ipharm.Repository.Common.Entity.Common;
 
 namespace IFES.POO2.Ipharm.Repository.Entity
 {

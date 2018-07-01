@@ -26,6 +26,10 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         public AccountController()
         {}
 
+        private static IpharmContext _context = new IpharmContext();
+
+        private UserRepository _userRepository = new UserRepository(_context);
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -69,15 +73,17 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         [HttpPost]
         public void SaveLocation(float latitude, float longitude)
         {
-            Localization localization = CurrentUser.Localization;
+            Localization localization = CurrentUser(_context).Localization;
 
             if (localization.Latitude == latitude && localization.Longitude == longitude)
                 return;
 
+            var curUser = CurrentUser(_context);
+
             localization.Latitude = latitude;
             localization.Longitude = longitude;
-            CurrentUser.Localization = localization;
-            UserRepository.Update(CurrentUser);
+            curUser.Localization = localization;
+            _userRepository.Update(curUser);
         }
 
         //
@@ -92,13 +98,13 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 return View(model);
             }
 
-            if (!UserRepository.Exists(model.Login))
+            if (!_userRepository.Exists(model.Login))
             {
                 ModelState.AddModelError("", "Este usuário não existe.");
                 return View(model);
             }
 
-            if (!UserRepository.IsActive(model.Login, false))
+            if (!_userRepository.IsActive(model.Login, false))
             {
                 ModelState.AddModelError("", "Este usuário está desabilitado.");
                 return View(model);
@@ -150,12 +156,12 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                     domainUser.IsActive = true;
                     domainUser.Id = new Guid(user.Id);
                     domainUser.Localization = new Localization(domainUser.Id);
-
+                    
                     Company company = Mapper.Map<RegisterViewModel, Company>(model);
                     company.Id = domainUser.Id;
                     domainUser.Company = company;
 
-                    UserRepository.Insert(domainUser);
+                    _userRepository.Insert(domainUser);
 
                     return RedirectToAction("Index", "Home");
                 }

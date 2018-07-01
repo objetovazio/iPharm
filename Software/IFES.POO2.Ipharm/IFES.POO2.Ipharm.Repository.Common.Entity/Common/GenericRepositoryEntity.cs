@@ -1,13 +1,8 @@
-﻿using IFES.POO2.Ipharm.Repository.Common;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace IFES.POO2.Ipharm.Repository.Common.Entity
+namespace IFES.POO2.Ipharm.Repository.Common.Entity.Common
 {
     public class GenericRepositoryEntity<T, TKey> : IGenericRepository<T, TKey>
         where T : class
@@ -66,6 +61,12 @@ namespace IFES.POO2.Ipharm.Repository.Common.Entity
             context.Set<T>().Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
+            context = null;
         }
     }
 }

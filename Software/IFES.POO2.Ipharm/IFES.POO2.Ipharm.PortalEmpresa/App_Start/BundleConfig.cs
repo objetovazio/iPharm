@@ -10,7 +10,8 @@ namespace IFES.POO2.Ipharm.PortalEmpresa
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Scripts/pnotify.custom.min.js"));
+                "~/Scripts/pnotify.custom.min.js",
+                "~/Scripts/jquery.mask.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));

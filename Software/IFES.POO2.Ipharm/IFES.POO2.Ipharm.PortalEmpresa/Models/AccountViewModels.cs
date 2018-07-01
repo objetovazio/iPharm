@@ -77,12 +77,12 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Models
 
         [Required]
         [Display(Name = "CNPJ")]
-        [StringLength(15, ErrorMessage = "O {0} deve conter {1} caracteres.", MinimumLength = 15)]
+        [StringLength(18, ErrorMessage = "O {0} deve conter {1} caracteres.", MinimumLength = 18)]
         public string Cnpj { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [StringLength(11, ErrorMessage = "O {0} deve conter {1} caracteres.", MinimumLength = 11)]
+        [StringLength(15, ErrorMessage = "O {0} deve conter {1} caracteres.", MinimumLength = 15)]
         [Display(Name = "Celular")]
         public string Phone { get; set; }
 

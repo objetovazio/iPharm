@@ -14,6 +14,7 @@ using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using AutoMapper;
 using IFES.POO2.Ipharm.Repository.Entity;
 using IFES.POO2.Ipharm.Repository.Common.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 {
@@ -60,15 +61,6 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
         [Authorize]
         [HttpPost]
         public void SaveLocation(float latitude, float longitude)
@@ -84,6 +76,15 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             localization.Longitude = longitude;
             curUser.Localization = localization;
             _userRepository.Update(curUser);
+        }
+
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         //
@@ -107,6 +108,16 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             if (!_userRepository.IsActive(model.Login, false))
             {
                 ModelState.AddModelError("", "Este usuário está desabilitado.");
+                return View(model);
+            }
+
+            var domainUser = _userRepository.SelectByLogin(model.Login);
+
+            var hasRole = await UserManager.IsInRoleAsync(domainUser.Id.ToString(), "Custommer");
+
+            if (!hasRole)
+            {
+                ModelState.AddModelError("", "Este usuário não tem permissão de acesso a este portal.");
                 return View(model);
             }
 
@@ -149,6 +160,17 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+                    if (!roleManager.RoleExists("Custommer"))
+                    {
+                        var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                        role.Name = "Custommer";
+                        roleManager.Create(role);
+                    }
+
+                    var roleresult = UserManager.AddToRole(user.Id, "Custommer");
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     User domainUser = Mapper.Map<RegisterViewModel, User>(model);

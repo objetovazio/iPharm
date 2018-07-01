@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Custommer")]
     public class HomeController : Controller
     {
         public ActionResult Index()

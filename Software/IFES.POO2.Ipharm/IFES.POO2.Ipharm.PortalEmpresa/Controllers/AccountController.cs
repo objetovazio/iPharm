@@ -14,6 +14,7 @@ using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using AutoMapper;
 using IFES.POO2.Ipharm.Repository.Entity;
 using IFES.POO2.Ipharm.Repository.Common.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
@@ -110,6 +111,16 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 return View(model);
             }
 
+            var domainUser = _userRepository.SelectByLogin(model.Login);
+
+            var hasRole = await UserManager.IsInRoleAsync(domainUser.Id.ToString(), "Company");
+
+            if (!hasRole)
+            {
+                ModelState.AddModelError("", "Este usuário não tem permissão de acesso a este portal.");
+                return View(model);
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, shouldLockout: false);
@@ -149,6 +160,17 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+                    if (!roleManager.RoleExists("Company"))
+                    {
+                        var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                        role.Name = "Company";
+                        roleManager.Create(role);
+                    }
+
+                    var roleresult = UserManager.AddToRole(user.Id, "Company");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     User domainUser = Mapper.Map<RegisterViewModel, User>(model);

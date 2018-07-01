@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Company")]
     public class HomeController : Controller
     {
         public ActionResult Index()

@@ -15,6 +15,7 @@ using IFES.POO2.Ipharm.Repository.Common.Entity.Common;
 
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
+    [Authorize(Roles = "Company")]
     public class ProductController : DefaultController
     {
         private static IpharmContext _context = new IpharmContext();

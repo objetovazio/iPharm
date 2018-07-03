@@ -14,7 +14,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
         {
             // Key
             Property(p => p.Id)
-                .IsRequired();
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             //Other Fields
             Property(p => p.Cpf)
@@ -31,8 +32,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
 
         protected override void ForeignKeyConfiguration()
         {
-            HasRequired(p => p.User)
-                .WithOptional(u => u.Person);
+            //HasRequired(p => p.User)
+            //    .WithRequiredDependent(u => u.Person);
         }
     }
 }

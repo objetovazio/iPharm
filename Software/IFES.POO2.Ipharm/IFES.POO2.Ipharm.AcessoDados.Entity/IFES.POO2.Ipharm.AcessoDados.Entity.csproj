@@ -68,9 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201807011845172_Migration1.cs" />
-    <Compile Include="Migrations\201807011845172_Migration1.Designer.cs">
-      <DependentUpon>201807011845172_Migration1.cs</DependentUpon>
+    <Compile Include="Migrations\201807022356054_M.cs" />
+    <Compile Include="Migrations\201807022356054_M.Designer.cs">
+      <DependentUpon>201807022356054_M.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypeConfiguration\CompanyTypeConfiguration.cs" />
@@ -114,8 +114,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807011845172_Migration1.resx">
-      <DependentUpon>201807011845172_Migration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807022356054_M.resx">
+      <DependentUpon>201807022356054_M.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

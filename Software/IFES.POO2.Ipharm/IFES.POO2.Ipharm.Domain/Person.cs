@@ -8,7 +8,7 @@ namespace IFES.POO2.Ipharm.Domain
 {
     public class Person
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Cpf { get; set; }
         public DateTime Birthday { get; set; }
 

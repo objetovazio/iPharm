@@ -1,0 +1,39 @@
+﻿@using IFES.POO2.Ipharm.Domain
+@model List<IFES.POO2.Ipharm.PortalUsuario.Models.CompanyListViewModel>
+
+@{
+    ViewBag.Title = "Lojas Disponíveis";
+    Layout = "~/Views/Shared/_LayoutGentelella.cshtml";
+    string reviews = string.Empty;
+    int itemCount = 0;
+
+    string openDiv = "<div class='row'>";
+    string closeDiv = "</div>";
+}
+
+@foreach (var item in Model)
+{
+
+
+    <a href="@Url.Action("ListProducts", "Company", new { id = item.Id })">
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="tile-stats">
+                <div class="icon">
+                    <i class="fa "></i>
+                </div>
+                <h2>&nbsp; @item.User.Name</h2>
+
+                @if (item.Reviews.Count == 0)
+                {
+                    reviews = "0 Feedbacks";
+                }
+
+                <h3>@reviews</h3>
+                <p>Aprox. @item.GetDistance</p>
+            </div>
+        </div>
+    </a>
+}
+
+
+

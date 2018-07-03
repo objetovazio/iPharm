@@ -19,7 +19,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
     [Authorize]
-    public class AccountController : DefaultController
+    public class AccountController : IpharmController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -66,25 +66,11 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (CurrentUser != null)
+                return Redirect("~/Home/Index");
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
-        }
-
-        [Authorize]
-        [HttpPost]
-        public void SaveLocation(float latitude, float longitude)
-        {
-            Localization localization = CurrentUser(_context).Localization;
-
-            if (localization.Latitude == latitude && localization.Longitude == longitude)
-                return;
-
-            var curUser = CurrentUser(_context);
-
-            localization.Latitude = latitude;
-            localization.Longitude = longitude;
-            curUser.Localization = localization;
-            _userRepository.Update(curUser);
         }
 
         //
@@ -171,23 +157,21 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 
                     var roleresult = UserManager.AddToRole(user.Id, "Company");
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
                     User domainUser = Mapper.Map<RegisterViewModel, User>(model);
                     domainUser.IsAdministrator = false;
                     domainUser.IsActive = true;
                     domainUser.Id = new Guid(user.Id);
                     domainUser.Localization = new Localization(domainUser.Id);
-                    
+
                     Company company = Mapper.Map<RegisterViewModel, Company>(model);
-                    company.Id = domainUser.Id;
                     company.Cnpj = model.Cnpj;
+                    company.User = domainUser;
                     domainUser.Company = company;
 
                     _userRepository.Insert(domainUser);
 
                     Message(MessageType.Success, "Cadastrado concluído com sucesso!");
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }

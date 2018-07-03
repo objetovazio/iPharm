@@ -18,7 +18,7 @@ using IFES.POO2.Ipharm.Repository.Common.Entity;
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
     [Authorize]
-    public class AccountController : DefaultController
+    public class AccountController : IpharmController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

@@ -16,7 +16,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Company", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

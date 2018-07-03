@@ -4,7 +4,7 @@
         for (var i = 0; i < validator.errorList.length; i++) {
             errors += validator.errorList[i].message + " \n";
         }
-        if (errors != "") MessageError("Erro", errors);
+        if (errors !== "") MessageError("Erro", errors);
     }
 );
 

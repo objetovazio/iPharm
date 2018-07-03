@@ -19,7 +19,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 {
     [Authorize]
-    public class AccountController : DefaultController
+    public class AccountController : IpharmController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -51,31 +51,8 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        [Authorize]
-        [HttpPost]
-        public void SaveLocation(float latitude, float longitude)
-        {
-            Localization localization = CurrentUser(_context).Localization;
-
-            if (localization.Latitude == latitude && localization.Longitude == longitude)
-                return;
-
-            var curUser = CurrentUser(_context);
-
-            localization.Latitude = latitude;
-            localization.Longitude = longitude;
-            curUser.Localization = localization;
-            _userRepository.Update(curUser);
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         //
@@ -113,7 +90,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
 
             var domainUser = _userRepository.SelectByLogin(model.Login);
 
-            var hasRole = await UserManager.IsInRoleAsync(domainUser.Id.ToString(), "Custommer");
+            var hasRole = await UserManager.IsInRoleAsync(domainUser.Id.ToString(), "Customer");
 
             if (!hasRole)
             {
@@ -162,14 +139,14 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
                 {
                     var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-                    if (!roleManager.RoleExists("Custommer"))
+                    if (!roleManager.RoleExists("Customer"))
                     {
                         var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                        role.Name = "Custommer";
+                        role.Name = "Customer";
                         roleManager.Create(role);
                     }
 
-                    var roleresult = UserManager.AddToRole(user.Id, "Custommer");
+                    var roleresult = UserManager.AddToRole(user.Id, "Customer");
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -180,14 +157,14 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
                     domainUser.Localization = new Localization(domainUser.Id);
 
                     Person person = Mapper.Map<RegisterViewModel, Person>(model);
-                    person.Id = domainUser.Id;
+                    //person.Id = domainUser.Id;
                     person.Cpf = model.Cpf;
                     domainUser.Person = person;
 
                     _userRepository.Insert(domainUser);
 
                     Message(MessageType.Success, "Cadastrado concluído com sucesso!");
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Company");
                 }
                 AddErrors(result);
             }
@@ -383,7 +360,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -440,7 +417,8 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Company");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

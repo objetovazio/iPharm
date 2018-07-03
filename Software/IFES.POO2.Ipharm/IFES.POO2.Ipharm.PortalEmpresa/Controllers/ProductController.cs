@@ -16,18 +16,21 @@ using IFES.POO2.Ipharm.Repository.Common.Entity.Common;
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
     [Authorize(Roles = "Company")]
-    public class ProductController : DefaultController
+    public class ProductController : IpharmController
     {
         private static IpharmContext _context = new IpharmContext();
 
         private GenericRepositoryEntity<Product, Guid>
-            _repository = new GenericRepositoryEntity<Product, Guid>(_context);
+            _repositoryProduct = new GenericRepositoryEntity<Product, Guid>(_context);
+
+        private GenericRepositoryEntity<Company, int>
+            _repositoryCompany = new GenericRepositoryEntity<Company, int>(_context);
 
         // GET: Product
         public ActionResult Index()
         {
             List<ProductViewModel> products =
-                Mapper.Map<List<Product>, List<ProductViewModel>>(_repository.Select().Where(p => p.Company == CurrentUser(_context).Company).ToList());
+                Mapper.Map<List<Product>, List<ProductViewModel>>(_repositoryProduct.Select().Where(p => p.Company.Id == CurrentUser.Company.Id).ToList());
             return View(products);
         }
 
@@ -48,8 +51,8 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
             {
                 Product product = Mapper.Map<ProductCreateViewModel, Product>(model);
 
-                product.Company = CurrentUser(_context).Company;
-                _repository.Insert(product);
+                product.Company = _repositoryCompany.SelectById(CurrentUser.Company.Id);
+                _repositoryProduct.Insert(product);
 
                 Message(MessageType.Success, "Produto criado com sucesso.");
 
@@ -67,7 +70,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 Message(MessageType.Error, "É necessário selecionar um produto.");
                 return RedirectToAction("Index");
             }
-            Product product = _repository.SelectById(id.Value);
+            Product product = _repositoryProduct.SelectById(id.Value);
             ProductEditViewModel productView = Mapper.Map<Product, ProductEditViewModel>(product);
             if (product == null)
             {
@@ -85,14 +88,14 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product p = _repository.SelectById(model.Id);
+                Product p = _repositoryProduct.SelectById(model.Id);
                 p.Name = model.Name;
                 p.Value = model.Value;
                 p.HasControl = model.HasControl;
                 p.Description = model.Description;
                 p.IsDeleted = model.IsDeleted;
 
-                _repository.Update(p);
+                _repositoryProduct.Update(p);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -107,7 +110,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 return RedirectToAction("Index");
             }
 
-            Product product = _repository.SelectById(id.Value);
+            Product product = _repositoryProduct.SelectById(id.Value);
             if (product == null)
             {
                 return HttpNotFound();
@@ -125,7 +128,7 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 Message(MessageType.Error, "É necessário selecionar um produto.");
                 return RedirectToAction("Index");
             }
-            _repository.DeleteById(id.Value);
+            _repositoryProduct.DeleteById(id.Value);
 
             return RedirectToAction("Index", "Product");
         }
@@ -135,9 +138,9 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            var product = _repository.SelectById(id);
+            var product = _repositoryProduct.SelectById(id);
             product.IsDeleted = true;
-            _repository.Update(product);
+            _repositoryProduct.Update(product);
             return RedirectToAction("Index");
         }
     }

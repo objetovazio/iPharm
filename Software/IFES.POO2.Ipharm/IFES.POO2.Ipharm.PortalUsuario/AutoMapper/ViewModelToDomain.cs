@@ -10,6 +10,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario.AutoMapper
         {
             CreateMap<RegisterViewModel, User>();
             CreateMap<RegisterViewModel, Person>();
+            CreateMap<CompanyListViewModel, Company>();
         }
     }
 }

@@ -3,7 +3,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Migration1 : DbMigration
+    public partial class M : DbMigration
     {
         public override void Up()
         {
@@ -43,12 +43,13 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                 "dbo.Company",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Cnpj = c.String(nullable: false, maxLength: 18),
+                        User_Id = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.Order",
@@ -58,8 +59,8 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         ValueOrder = c.Decimal(nullable: false, precision: 18, scale: 2),
                         OrderStatus = c.Int(nullable: false),
                         Address_Id = c.Int(nullable: false),
-                        Company_Id = c.Guid(nullable: false),
-                        Person_Id = c.Guid(nullable: false),
+                        Company_Id = c.Int(nullable: false),
+                        Person_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Address", t => t.Address_Id, cascadeDelete: true)
@@ -95,7 +96,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         Description = c.String(nullable: false),
                         HasControl = c.Boolean(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
-                        Company_Id = c.Guid(nullable: false),
+                        Company_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Company", t => t.Company_Id, cascadeDelete: true)
@@ -127,7 +128,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         Description = c.String(nullable: false),
                         CardNumber = c.String(),
                         SecurityCode = c.String(),
-                        Person_Id = c.Guid(nullable: false),
+                        Person_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Person", t => t.Person_Id)
@@ -137,13 +138,14 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                 "dbo.Person",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Cpf = c.String(nullable: false),
                         Birthday = c.DateTime(nullable: false),
+                        User_Id = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.Review",
@@ -152,7 +154,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Stars = c.Int(nullable: false),
                         ReviewDetails = c.String(nullable: false, maxLength: 200),
-                        Company_Id = c.Guid(nullable: false),
+                        Company_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Company", t => t.Company_Id, cascadeDelete: true)
@@ -177,14 +179,14 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Address", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Person", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Localization", "Id", "dbo.Users");
-            DropForeignKey("dbo.Company", "Id", "dbo.Users");
+            DropForeignKey("dbo.Company", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Review", "Id", "dbo.Order");
             DropForeignKey("dbo.Review", "Company_Id", "dbo.Company");
             DropForeignKey("dbo.Order", "Person_Id", "dbo.Person");
             DropForeignKey("dbo.Payment", "PaymentMethod_Id", "dbo.PaymentMethod");
             DropForeignKey("dbo.PaymentMethod", "Person_Id", "dbo.Person");
-            DropForeignKey("dbo.Person", "Id", "dbo.Users");
             DropForeignKey("dbo.Payment", "Order_Id", "dbo.Order");
             DropForeignKey("dbo.ItemOrder", "Product_Id", "dbo.Product");
             DropForeignKey("dbo.Product", "Company_Id", "dbo.Company");
@@ -194,7 +196,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
             DropIndex("dbo.Localization", new[] { "Id" });
             DropIndex("dbo.Review", new[] { "Company_Id" });
             DropIndex("dbo.Review", new[] { "Id" });
-            DropIndex("dbo.Person", new[] { "Id" });
+            DropIndex("dbo.Person", new[] { "User_Id" });
             DropIndex("dbo.PaymentMethod", new[] { "Person_Id" });
             DropIndex("dbo.Payment", new[] { "PaymentMethod_Id" });
             DropIndex("dbo.Payment", new[] { "Order_Id" });
@@ -204,7 +206,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
             DropIndex("dbo.Order", new[] { "Person_Id" });
             DropIndex("dbo.Order", new[] { "Company_Id" });
             DropIndex("dbo.Order", new[] { "Address_Id" });
-            DropIndex("dbo.Company", new[] { "Id" });
+            DropIndex("dbo.Company", new[] { "User_Id" });
             DropIndex("dbo.Address", new[] { "User_Id" });
             DropTable("dbo.Localization");
             DropTable("dbo.Review");

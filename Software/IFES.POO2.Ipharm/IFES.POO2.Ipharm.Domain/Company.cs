@@ -8,7 +8,7 @@ namespace IFES.POO2.Ipharm.Domain
 {
     public class Company 
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Cnpj { get; set; }
 
         public User User { get; set; }

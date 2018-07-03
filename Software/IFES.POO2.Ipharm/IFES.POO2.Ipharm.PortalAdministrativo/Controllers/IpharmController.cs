@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using IFES.POO2.Ipharm.Domain;
-using IFES.POO2.Ipharm.Repository.Common.Entity;
+using IFES.POO2.Ipharm.PortalAdministrativo.Filters;
 using IFES.POO2.Ipharm.Repository.Entity;
 using Microsoft.AspNet.Identity;
+
 
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
@@ -20,26 +18,13 @@ namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
         Notice = 4
     }
 
-    public class DefaultController : Controller
+    [UserDataFilter]
+    public class IpharmController : Controller
     {
-        private User _currentUser;
-        private UserRepository _userRepository;
-
-        public UserRepository UserRepository
-        {
-            get
-            {
-                if (_userRepository == null) _userRepository = new UserRepository(new IpharmContext());
-                return _userRepository;
-            }
-        }
         public User CurrentUser
         {
-            get
-            {
-                if (_currentUser == null) _currentUser = _userRepository.SelectById(Guid.Parse(User.Identity.GetUserId()));
-                return _currentUser;
-            }
+            get => (User)Session["CurrentUser"];
+            set => Session["CurrentUser"] = value;
         }
 
         /// <summary>

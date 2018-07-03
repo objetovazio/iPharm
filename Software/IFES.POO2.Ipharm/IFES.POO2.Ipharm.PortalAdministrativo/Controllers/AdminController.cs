@@ -16,10 +16,14 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IFES.POO2.Ipharm.PortalAdministrativo.Controllers
 {
-    public class AdminController : DefaultController
+    public class AdminController : IpharmController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private static IpharmContext _context = new IpharmContext();
+
+        UserRepository UserRepository = new UserRepository(_context);
 
         public ApplicationSignInManager SignInManager
         {

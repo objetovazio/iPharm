@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using IFES.POO2.Ipharm.AcessoDados.Entity.Context;
 using IFES.POO2.Ipharm.Domain;
+using IFES.POO2.Ipharm.PortalEmpresa.Filters;
 using IFES.POO2.Ipharm.Repository.Entity;
 using Microsoft.AspNet.Identity;
 
@@ -20,13 +21,17 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
         Notice = 4
     }
 
-    public class DefaultController : Controller
+    [UserDataFilter]
+    public class IpharmController : Controller
     {
-        private User _currentUser;
-
-        public User CurrentUser(IpharmContext context)
+        public IpharmController()
         {
-                return _currentUser ?? (_currentUser = new UserRepository(context).SelectById(Guid.Parse(User.Identity.GetUserId())));   
+        }
+
+        public User CurrentUser
+        {
+            get => (User)Session["CurrentUser"];
+            set => Session["CurrentUser"] = value;
         }
 
         /// <summary>
@@ -54,5 +59,6 @@ namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
                 ModelState.AddModelError("", message); ;
             }
         }
+
     }
 }

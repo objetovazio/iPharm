@@ -44,6 +44,13 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             HasKey(p => p.Id);
         }
 
-        protected override void ForeignKeyConfiguration() { }
+        protected override void ForeignKeyConfiguration()
+        {
+            HasOptional(user => user.Company)
+                .WithRequired(company => company.User);
+
+            HasOptional(user => user.Person)
+                .WithRequired(company => company.User);
+        }
     }
 }

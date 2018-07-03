@@ -11,17 +11,17 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Context
 {
     public class IpharmContext : DbContext
     {
-        DbSet<Address> Addresses { get; set; }
-        DbSet<Company> Companies { get; set; }
-        DbSet<Localization> Localizations { get; set; }
-        DbSet<ItemOrder> ItemsOrder { get; set; }
-        DbSet<Order> Orders { get; set; }
-        DbSet<Payment> Payments { get; set; }
-        DbSet<PaymentMethod> PaymentMethods { get; set; }
-        DbSet<Person> People { get; set; }
-        DbSet<Product> Products { get; set; }
-        DbSet<Review> Reviews { get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Localization> Localizations { get; set; }
+        public DbSet<ItemOrder> ItemsOrder { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public IpharmContext()
         {

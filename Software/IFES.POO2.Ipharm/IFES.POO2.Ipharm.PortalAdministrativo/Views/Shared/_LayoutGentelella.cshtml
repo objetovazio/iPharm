@@ -10,7 +10,6 @@
 
         //TempData["Message"] = TempData["MessageType"] = null;
     }
-
 }
 <!DOCTYPE html>
 <html>
@@ -97,11 +96,16 @@
                 <div class="pull-right">
                     Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
                 </div>
+                <div id="location">
+                    a
+                </div>
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
         </div>
     </div>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
@@ -110,6 +114,7 @@
     <script src="~/Libs/Gentelella/js/custom.min.js"></script>
     <script src="~/Scripts/Custom/login.js"></script>
     <script src="~/Scripts/Custom/pnotification.js"></script>
+    <script src="~/Scripts/Custom/site.js"></script>
 
     @if (!ViewData.ModelState.IsValid)
     {
@@ -135,7 +140,14 @@
             Message('@MessageType', message);
         </script>
     }
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        getLocation('@Url.Action("SaveLocation", "Ajax")');
+    });
+</script>
 
-    @RenderSection("scripts", required: false)
+
+@RenderSection("scripts", required: false)
 </body>
 </html>

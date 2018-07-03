@@ -11,7 +11,7 @@ using IFES.POO2.Ipharm.PortalEmpresa.Models;
 namespace IFES.POO2.Ipharm.PortalEmpresa.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : IpharmController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

@@ -19,11 +19,14 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
     [Authorize(Roles = "Customer")]
     public class CompanyController : IpharmController
     {
-        private static IpharmContext _context = new IpharmContext();
+        private static readonly IpharmContext _context = new IpharmContext();
 
         public CompanyRepository RepositoryCompany = new CompanyRepository(_context);
 
         public GenericRepositoryEntity<Product, Guid> RepositoryProduct = new GenericRepositoryEntity<Product, Guid>(_context);
+
+        public GenericRepositoryEntity<Order, int> RepositoryOrder = new GenericRepositoryEntity<Order, int>(_context);
+
 
         // GET: Company
         public ActionResult Index()
@@ -37,18 +40,36 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             return View(model);
         }
 
-
-
-        private GenericRepositoryEntity<Company, int>
-            _repositoryCompany = new GenericRepositoryEntity<Company, int>(_context);
-
         // GET: Product
-        public ActionResult ListProducts(int idEmpresa)
+        public ActionResult ListProducts(int id)
         {
+            CurrentCompany = RepositoryCompany.SelectById(id);
+
+            if (CurrentOrder == null || (CurrentOrder != null && CurrentOrder.Company.Id != id))
+            {
+                CurrentOrder = new Order(CurrentUser.Person, CurrentCompany);
+            }
+
             List<ProductViewModel> products =
-                Mapper.Map<List<Product>, List<ProductViewModel>>(RepositoryProduct.Select().Where(p => p.Company.Id == CurrentUser.Company.Id).ToList());
-            return View(products);
+                Mapper.Map<List<Product>, List<ProductViewModel>>(CurrentCompany.Products).Where(p => !p.IsDeleted).ToList();
+
+            return View("ProductList", products);
         }
 
+        // GET: Product
+        public ActionResult ListChart()
+        {
+            if (CurrentOrder == null) return RedirectToAction("Index", "Company");
+
+            var list = CurrentOrder.ItemsOrder;
+            List<Product> products = new List<Product>();
+
+            list.ForEach(ls =>  products.Add(ls.Product));
+
+
+            ViewBag.CompanyId = CurrentCompany.Id;
+
+            return View("ProductsChart", Mapper.Map<List<Product>, List<ProductViewModel>>(products));
+        }
     }
 }

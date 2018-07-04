@@ -320,6 +320,9 @@
     <Content Include="Views\Company\Index.cshtml">
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Company\ProductDetails.cshtml" />
+    <Content Include="Views\Company\ProductList.cshtml" />
+    <Content Include="Views\Company\ProductsChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

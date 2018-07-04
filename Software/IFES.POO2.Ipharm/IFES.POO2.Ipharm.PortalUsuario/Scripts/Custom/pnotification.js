@@ -19,6 +19,12 @@ function MessageNotice(title, text) {
     new PNotify({
         title: title,
         text: text,
+        nonblock: {
+            nonblock: true
+        },
+        buttons: {
+            show_on_nonblock: true
+        },
         animate: {
             animate: true,
             in_class: 'bounceInLeft',
@@ -33,6 +39,12 @@ function MessageInfo(title, text) {
         text: text,
         type: 'info',
         icon: 'fa fa-info',
+        nonblock: {
+            nonblock: true
+        },
+        buttons: {
+            show_on_nonblock: true
+        },
         animate: {
             animate: true,
             in_class: 'bounceInLeft',
@@ -47,6 +59,12 @@ function MessageSuccess(title, text) {
         text: text,
         type: 'success',
         icon: 'fa fa-check-circle',
+        nonblock: {
+            nonblock: true
+        },
+        buttons: {
+            show_on_nonblock: true
+        },
         animate: {
             animate: true,
             in_class: 'bounceInLeft',
@@ -61,6 +79,12 @@ function MessageError(title, text) {
         text: text,
         type: 'error',
         icon: 'fa fa-times-circle',
+        nonblock: {
+            nonblock: true
+        },
+        buttons: {
+            show_on_nonblock: true
+        },
         animate: {
             animate: true,
             in_class: 'bounceInLeft',

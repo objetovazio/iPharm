@@ -1,7 +1,15 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using IFES.POO2.Ipharm.Domain
+@using Microsoft.AspNet.Identity
 @{ 
-    var imgSrc = "Images/users/" + @User.Identity.GetUserId() + ".jpg";
-    if (!File.Exists(Server.MapPath(imgSrc))) imgSrc = "Images/users/default.png";
+    Order order = (Order)Session["CurrentOrder"];
+    int quantity = 0;
+    if (order != null) {quantity = order.ItemsOrder.Count;}
+
+    var imgSrc = "Images/users/" + User.Identity.GetUserId() + ".jpg";
+    if (!File.Exists(Server.MapPath(imgSrc)))
+    {
+        imgSrc = "Images/users/default.png";
+    }
 }
 
 <div class="top_nav">
@@ -17,7 +25,7 @@
                         <img src="~/@imgSrc" alt="">@User.Identity.GetUserName()
                         <span class=" fa fa-angle-down"></span>
                     </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <ul class="dropdown-menu dropdown-usermenu ">
                         <li><a href="javascript:;"> Profile</a></li>
                         <li>
                             <a href="javascript:;">
@@ -28,7 +36,13 @@
                         <li><a href="javascript:;">Help</a></li>
                         @Html.Partial("_LoginPartial")
                     </ul>
-                </li>            
+                </li>
+                <li>
+                    <a href="@Url.Action("ListChart", "Company")" class="info-number" aria-expanded="false">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="quantityChart" class="badge bg-green">@quantity</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

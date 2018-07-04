@@ -26,6 +26,18 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
             set => Session["CurrentUser"] = value;
         }
 
+        public Order CurrentOrder
+        {
+            get => (Order)Session["CurrentOrder"];
+            set => Session["CurrentOrder"] = value;
+        }
+
+        public Company CurrentCompany
+        {
+            get => (Company)Session["CurrentCompany"];
+            set => Session["CurrentCompany"] = value;
+        }
+
         /// <summary>
         /// Cria qualquer tipo de mensagem personalizada
         /// </summary>

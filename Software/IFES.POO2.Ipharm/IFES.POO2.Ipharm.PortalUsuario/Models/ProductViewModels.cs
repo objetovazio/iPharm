@@ -18,6 +18,8 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Models
 
         [Display(Name = "Ativo")]
         public bool IsDeleted { get; set; }
+
+        public string Description { get; set; }
     }
 
     public class ProductDetailsViewModel

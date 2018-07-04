@@ -19,7 +19,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.TypeConfiguration
             HasRequired(p => p.Person)
                 .WithMany(c => c.Orders);
 
-            HasRequired(p => p.Address);
+            HasOptional(p => p.Address);
         }
 
         protected override void PrimaryKeyConfiguration()

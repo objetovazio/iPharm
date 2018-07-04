@@ -9,7 +9,7 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Models
 {
     public class CompanyListViewModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Cnpj { get; set; }
 
         public User User { get; set; }
@@ -28,7 +28,13 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Models
         {
             get
             {
-                return UserCoordinate.GetDistanceTo(ShopCoordinate).ToString("##,#") + " KM";
+                double distance = UserCoordinate.GetDistanceTo(ShopCoordinate);
+
+                if (distance / 1000.0 > 1)
+                    return "Aprox. " + (distance / 1000.0).ToString("#,##") + " Km";
+
+                else
+                    return "Menos de 1 Km";
             }
         }
     }

@@ -8,6 +8,16 @@ namespace IFES.POO2.Ipharm.Domain
 {
     public class Order
     {
+        public Order() { }
+
+        public Order(Person person, Company company)
+        {
+            this.Company = company;
+            this.OrderStatus = EnumOrderStatus.Carrinho;
+            this.ItemsOrder = new List<ItemOrder>();
+            this.Person = person;
+        }
+
         public int Id { get; set; }
         public decimal ValueOrder { get; set; }
         public EnumOrderStatus OrderStatus { get; set; }

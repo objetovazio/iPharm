@@ -3,7 +3,7 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class M : DbMigration
+    public partial class Mig1 : DbMigration
     {
         public override void Up()
         {
@@ -58,12 +58,12 @@ namespace IFES.POO2.Ipharm.AcessoDados.Entity.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ValueOrder = c.Decimal(nullable: false, precision: 18, scale: 2),
                         OrderStatus = c.Int(nullable: false),
-                        Address_Id = c.Int(nullable: false),
+                        Address_Id = c.Int(),
                         Company_Id = c.Int(nullable: false),
                         Person_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Address", t => t.Address_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Address", t => t.Address_Id)
                 .ForeignKey("dbo.Company", t => t.Company_Id)
                 .ForeignKey("dbo.Person", t => t.Person_Id, cascadeDelete: true)
                 .Index(t => t.Address_Id)

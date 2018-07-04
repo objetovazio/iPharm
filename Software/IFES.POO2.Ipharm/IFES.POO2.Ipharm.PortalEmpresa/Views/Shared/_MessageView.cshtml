@@ -1,0 +1,20 @@
+﻿@{
+    string successMessage = null;
+    string MessageType = null;
+
+    if (TempData["Message"] != null)
+    {
+        successMessage = TempData["Message"].ToString();
+        MessageType = TempData["MessageType"].ToString();
+
+        //TempData["Message"] = TempData["MessageType"] = null;
+    }
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script type="text/javascript">
+        var message = "@(successMessage)"
+        Message('@MessageType', message);
+    </script>
+}

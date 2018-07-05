@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Device.Location;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,13 +20,18 @@ namespace IFES.POO2.Ipharm.PortalUsuario.Controllers
     [Authorize(Roles = "Customer")]
     public class CompanyController : IpharmController
     {
-        private static readonly IpharmContext _context = new IpharmContext();
+        private static IpharmContext _context;
 
-        public CompanyRepository RepositoryCompany = new CompanyRepository(_context);
+        public static IpharmContext Context
+        {
+            get { return _context ?? (_context = new IpharmContext()); }
+        }
 
-        public GenericRepositoryEntity<Product, Guid> RepositoryProduct = new GenericRepositoryEntity<Product, Guid>(_context);
+        public CompanyRepository RepositoryCompany = new CompanyRepository(Context);
 
-        public GenericRepositoryEntity<Order, int> RepositoryOrder = new GenericRepositoryEntity<Order, int>(_context);
+        public GenericRepositoryEntity<Product, Guid> RepositoryProduct = new GenericRepositoryEntity<Product, Guid>(Context);
+
+        public GenericRepositoryEntity<Order, int> RepositoryOrder = new GenericRepositoryEntity<Order, int>(Context);
 
 
         // GET: Company
